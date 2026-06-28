@@ -41,3 +41,4 @@
 - Verified `https://www.премиум-продюсер.рф/` redirects to the apex HTTPS domain.
 - Replaced the Linktree page with a minimalist Yeezy-inspired portfolio grid for works.
 - Updated README to describe the current works catalog instead of the earlier Linktree version.
+- Added a CSS cache-buster query string after the browser showed the new HTML with stale cached CSS.
