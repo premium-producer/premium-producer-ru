@@ -2,7 +2,7 @@
 
 ## Snapshot
 
-Date: 2026-06-28
+Date: 2026-06-29
 
 The user wants to build a personal website for the domain `премиум-продюсер.рф`. They have GitHub and want the project maintained there. They specifically requested an `agent/` folder and an `agent/memory/` subfolder for persistent context.
 
@@ -28,15 +28,11 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 
 ## Next Likely Step
 
-Update DNS records for `премиум-продюсер.рф` at the domain registrar so the domain points to GitHub Pages.
+Verify GitHub Pages accepts the restored custom domain and that HTTPS works for `https://премиум-продюсер.рф/`.
 
 The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app, then local HTTPS credentials were configured through macOS Keychain. Direct `git push` now works. The repository is now public so GitHub Pages can be used on the free plan.
 
 The current site is a static Linktree-style page designed to be published from branch `main`, folder `/root`.
-
-Temporary GitHub Pages URL while custom domain DNS propagates:
-
-`https://premium-producer.github.io/premium-producer-ru/index.html`
 
 GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. Reg.ru DNS resource records were updated in the UI to:
 
@@ -45,6 +41,4 @@ GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. R
 - `A @ 185.199.110.153`
 - `A @ 185.199.111.153`
 
-Immediately after the UI update, external DNS still returned old address `95.163.244.138`; wait for propagation before enabling HTTPS.
-
-The root `CNAME` file was temporarily removed and the custom domain was removed from GitHub Pages settings so GitHub Pages stops redirecting the default project URL to the custom domain. `index.html` works now; the root project URL may still redirect until GitHub/Fastly cache expires. Restore `CNAME` with `xn----htbbcmxbrdffgdmx6p.xn--p1ai` after DNS propagation.
+On 2026-06-29, local DNS, Google DNS, and Cloudflare DNS returned the four GitHub Pages IPs. The root `CNAME` file was restored with `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.

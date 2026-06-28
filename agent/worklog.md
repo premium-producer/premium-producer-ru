@@ -32,3 +32,7 @@
 - Removed the custom domain from GitHub Pages settings through the GitHub API.
 - Verified `https://premium-producer.github.io/premium-producer-ru/index.html` returns the deployed site with `200 OK`.
 - The root project URL may still redirect until GitHub/Fastly cache expires.
+- Reworked the static site visual direction from dark Linktree-style to a light stone, glass, and gold composition based on user-provided references.
+- Verified the updated page locally at `http://127.0.0.1:8000/` in desktop and mobile viewports; no console errors or horizontal overflow found.
+- Confirmed local, Google, and Cloudflare DNS now resolve `премиум-продюсер.рф` to the four GitHub Pages IP addresses.
+- Restored the root `CNAME` file for `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
