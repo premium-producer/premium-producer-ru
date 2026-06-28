@@ -58,3 +58,4 @@
 - Reintroduced a desktop-only `preventDefault` smooth-scroll experiment based on the pasted script and added an animated fleur-de-lis DOM cursor with hover and press states.
 - Removed the heavy `preventDefault` smooth-scroll experiment after Mac trackpad testing felt bad; kept native scrolling, CSS edge overscroll blocking, and the animated fleur-de-lis cursor.
 - Added pinned Lenis 1.3.25 from jsDelivr for a controlled desktop smooth-scroll trial while keeping native scroll as the fallback for mobile, reduced-motion, or CDN failure.
+- Made the desktop fleur-de-lis cursor rotate smoothly toward the nearest work visual, inverted it with blend mode, and increased Lenis wheel speed by 25%.

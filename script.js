@@ -20,8 +20,11 @@ function initFleurCursor() {
   let currentY = window.innerHeight / 2;
   let targetX = currentX;
   let targetY = currentY;
+  let currentRotation = 0;
+  let targetRotation = 0;
   let hovering = false;
   let pressed = false;
+  let visualTargets = Array.from(document.querySelectorAll(".work-visual"));
 
   const isInteractive = (element) => Boolean(
     element?.closest("a[href], button, [role='button'], [data-href], [data-url]"),
@@ -32,11 +35,40 @@ function initFleurCursor() {
     cursor.classList.toggle("is-pressed", pressed);
   };
 
+  const getNearestVisualAngle = () => {
+    let nearestDistance = Infinity;
+    let nearestAngle = targetRotation;
+
+    visualTargets.forEach((element) => {
+      const rect = element.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const deltaX = centerX - currentX;
+      const deltaY = centerY - currentY;
+      const distance = deltaX * deltaX + deltaY * deltaY;
+
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestAngle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 90;
+      }
+    });
+
+    return nearestAngle;
+  };
+
+  const rotateToward = (current, target) => {
+    const delta = ((target - current + 540) % 360) - 180;
+    return current + delta * 0.12;
+  };
+
   const tick = () => {
     currentX += (targetX - currentX) / 4;
     currentY += (targetY - currentY) / 4;
+    targetRotation = getNearestVisualAngle();
+    currentRotation = rotateToward(currentRotation, targetRotation);
     cursor.style.left = `${currentX}px`;
     cursor.style.top = `${currentY}px`;
+    cursor.style.setProperty("--cursor-rotation", `${currentRotation}deg`);
     window.requestAnimationFrame(tick);
   };
 
@@ -78,6 +110,10 @@ function initFleurCursor() {
     cursor.classList.add("is-visible");
   });
 
+  window.addEventListener("resize", () => {
+    visualTargets = Array.from(document.querySelectorAll(".work-visual"));
+  });
+
   tick();
 }
 
@@ -92,7 +128,7 @@ function initLenisScroll() {
     smoothWheel: true,
     syncTouch: false,
     lerp: 0.08,
-    wheelMultiplier: 0.75,
+    wheelMultiplier: 0.9375,
     touchMultiplier: 1,
     anchors: {
       offset: -60,

@@ -45,6 +45,8 @@ a {
   }
 
   .fleur-cursor {
+    --cursor-rotation: 0deg;
+    --cursor-scale: 1;
     width: 21px;
     height: 21px;
     pointer-events: none;
@@ -53,12 +55,12 @@ a {
     left: 0;
     z-index: 99999999;
     background: url("./public/fleur-cursor.svg") center / contain no-repeat;
+    filter: invert(1);
+    mix-blend-mode: difference;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(1);
-    transition:
-      opacity 180ms ease,
-      transform 180ms ease;
-    will-change: left, top, transform, opacity;
+    transform: translate(-50%, -50%) rotate(var(--cursor-rotation)) scale(var(--cursor-scale));
+    transition: opacity 180ms ease;
+    will-change: left, top, transform, opacity, filter;
   }
 
   .fleur-cursor.is-visible {
@@ -66,11 +68,11 @@ a {
   }
 
   .fleur-cursor.is-hovering {
-    transform: translate(-50%, -50%) scale(1.75);
+    --cursor-scale: 1.75;
   }
 
   .fleur-cursor.is-pressed {
-    transform: translate(-50%, -50%) scale(1.25);
+    --cursor-scale: 1.25;
   }
 }
 
