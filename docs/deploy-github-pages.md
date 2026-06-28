@@ -9,15 +9,15 @@
 
 ## GitHub Pages Settings
 
-Status: blocked for the current private repository plan.
+Status: enabled.
 
-GitHub API returned:
+The repository was made public and GitHub Pages was enabled successfully.
 
 ```text
-Your current plan does not support GitHub Pages for this repository.
+source: main / root
+custom domain: xn----htbbcmxbrdffgdmx6p.xn--p1ai
+status: built
 ```
-
-To use GitHub Pages, either make the repository public or use a GitHub plan that supports Pages for private repositories.
 
 In GitHub:
 
@@ -57,12 +57,12 @@ www  CNAME  premium-producer.github.io
 
 DNS propagation can take up to 24 hours.
 
-## Private Repository Alternatives
+## Current DNS Status
 
-If the repository must stay private, use one of these deployment targets instead:
+As of 2026-06-28, `xn----htbbcmxbrdffgdmx6p.xn--p1ai` resolves to:
 
-- Vercel
-- Cloudflare Pages
-- Netlify
+```text
+95.163.244.138
+```
 
-All three can deploy a static HTML/CSS site and connect a custom domain while keeping the GitHub repository private.
+This is not a GitHub Pages IP. Update DNS records at the domain registrar.

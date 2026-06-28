@@ -21,3 +21,8 @@
 - Pushed the Linktree site to GitHub.
 - Tried to enable GitHub Pages through GitHub API.
 - GitHub Pages is blocked because the current plan does not support Pages for this private repository.
+- User chose to make the repository public.
+- Changed `premium-producer/premium-producer-ru` visibility from private to public.
+- Enabled GitHub Pages from branch `main`, folder `/root`.
+- Confirmed GitHub Pages status is `built`.
+- Checked DNS for `xn----htbbcmxbrdffgdmx6p.xn--p1ai`; it currently resolves to `95.163.244.138`, not GitHub Pages.
