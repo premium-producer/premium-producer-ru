@@ -36,3 +36,6 @@
 - Verified the updated page locally at `http://127.0.0.1:8000/` in desktop and mobile viewports; no console errors or horizontal overflow found.
 - Confirmed local, Google, and Cloudflare DNS now resolve `премиум-продюсер.рф` to the four GitHub Pages IP addresses.
 - Restored the root `CNAME` file for `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
+- Pushed the restored custom domain configuration to `origin/main`.
+- Verified `https://премиум-продюсер.рф/` returns the deployed GitHub Pages site with `200 OK`.
+- Verified `https://www.премиум-продюсер.рф/` redirects to the apex HTTPS domain.

@@ -4,11 +4,11 @@ Personal website project for the domain `премиум-продюсер.рф`.
 
 ## Current status
 
-Basic Linktree-style static site is prepared for GitHub Pages.
+Static personal Linktree-style site is published with GitHub Pages.
 
-Temporary live URL:
+Live URL:
 
-https://premium-producer.github.io/premium-producer-ru/index.html
+https://премиум-продюсер.рф/
 
 Local preview:
 

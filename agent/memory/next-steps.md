@@ -1,5 +1,4 @@
 # Next Steps
 
-1. Verify `https://премиум-продюсер.рф/` returns the deployed GitHub Pages site.
-2. Confirm GitHub Pages has HTTPS enforced for the custom domain.
-3. Replace placeholder social links with real Telegram, YouTube, Instagram, and email/contact URLs.
+1. Enable `Enforce HTTPS` in GitHub Pages settings if `http://премиум-продюсер.рф/` does not redirect to HTTPS automatically.
+2. Replace placeholder social links with real Telegram, YouTube, Instagram, and email/contact URLs.

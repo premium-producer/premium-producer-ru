@@ -28,7 +28,7 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 
 ## Next Likely Step
 
-Verify GitHub Pages accepts the restored custom domain and that HTTPS works for `https://премиум-продюсер.рф/`.
+Replace placeholder social links with real Telegram, YouTube, Instagram, and email/contact URLs.
 
 The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app, then local HTTPS credentials were configured through macOS Keychain. Direct `git push` now works. The repository is now public so GitHub Pages can be used on the free plan.
 
@@ -41,4 +41,4 @@ GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. R
 - `A @ 185.199.110.153`
 - `A @ 185.199.111.153`
 
-On 2026-06-29, local DNS, Google DNS, and Cloudflare DNS returned the four GitHub Pages IPs. The root `CNAME` file was restored with `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
+On 2026-06-29, local DNS, Google DNS, and Cloudflare DNS returned the four GitHub Pages IPs. The root `CNAME` file was restored with `xn----htbbcmxbrdffgdmx6p.xn--p1ai`. `https://премиум-продюсер.рф/` returns the deployed site with `200 OK`; `https://www.премиум-продюсер.рф/` redirects to the apex HTTPS domain.

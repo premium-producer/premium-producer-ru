@@ -13,16 +13,17 @@ Status: enabled.
 
 The repository was made public and GitHub Pages was enabled successfully.
 
-Temporary live URL while custom domain DNS propagates:
+Live URL:
 
 ```text
-https://premium-producer.github.io/premium-producer-ru/index.html
+https://премиум-продюсер.рф/
 ```
 
 ```text
 source: main / root
-custom domain: temporarily disabled
+custom domain: xn----htbbcmxbrdffgdmx6p.xn--p1ai
 status: built
+HTTPS: certificate approved; direct HTTPS works
 ```
 
 In GitHub:
@@ -65,7 +66,7 @@ DNS propagation can take up to 24 hours.
 
 ## Current DNS Status
 
-As of 2026-06-28, the Reg.ru authoritative nameservers are configured with GitHub Pages records:
+As of 2026-06-29, local DNS, Google DNS, and Cloudflare DNS resolve the apex domain to GitHub Pages:
 
 ```text
 A @ 185.199.108.153
@@ -75,14 +76,11 @@ A @ 185.199.111.153
 CNAME www premium-producer.github.io.
 ```
 
-Public DNS caches may still return the old `95.163.244.138` address until propagation finishes.
+`https://премиум-продюсер.рф/` returns `200 OK`.
+`https://www.премиум-продюсер.рф/` redirects to the apex HTTPS domain.
 
-## Re-enable Custom Domain
+## HTTPS Enforcement
 
-After DNS propagation, restore the root `CNAME` file with:
-
-```text
-xn----htbbcmxbrdffgdmx6p.xn--p1ai
-```
-
-Then commit and push. GitHub Pages should switch back to the custom domain, and HTTPS can be enforced after GitHub verifies DNS.
+The certificate is approved by GitHub Pages. If `http://премиум-продюсер.рф/`
+does not automatically redirect to HTTPS, enable `Enforce HTTPS` in GitHub
+repository settings: `Settings` -> `Pages`.
