@@ -21,6 +21,6 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 
 ## Next Likely Step
 
-Create private GitHub repository `premium-producer/premium-producer-rf`, connect it as `origin`, and push `main`.
+Connect private GitHub repository `premium-producer/premium-producer-ru` as `origin` and push `main`.
 
-The connector currently exposes repository file/issue/PR operations but not repository creation. Local `gh` is not installed and no `GITHUB_TOKEN`/`GH_TOKEN` is present in the shell environment, so remote creation requires GitHub web UI authorization or another authenticated method.
+The GitHub repository was created by the user through the GitHub web UI.

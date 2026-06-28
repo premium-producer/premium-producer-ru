@@ -6,4 +6,4 @@
 - Use `agent/memory/` for durable project context.
 - Keep the initial website source folders as `src/` and `public/` until the final stack is chosen.
 - Use GitHub owner `premium-producer`.
-- Use proposed repository name `premium-producer-rf` for the private project repo.
+- Use private GitHub repository `premium-producer/premium-producer-ru`.
