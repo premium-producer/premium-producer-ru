@@ -48,3 +48,5 @@
 - Switched the site typography to Google Fonts Outfit and bumped the CSS cache-buster.
 - Reduced typography weights for a thinner minimalist look and corrected all `mailto:` links to `hello@premium-producer.ru`.
 - Made the works grid more compact to better match the Yeezy reference: smaller objects, shorter rows, tighter gaps, and a new CSS cache-buster.
+- Rebalanced vertical spacing so work codes sit between rows with comparable whitespace above and below.
+- Removed hidden project-title rows from the grid layout so the object-code-next-object spacing stays balanced.

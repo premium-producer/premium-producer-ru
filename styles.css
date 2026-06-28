@@ -125,13 +125,14 @@ a {
 .work-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  row-gap: clamp(42px, 4.6vw, 82px);
+  row-gap: 0;
 }
 
 .work-card {
+  position: relative;
   min-width: 0;
   display: grid;
-  grid-template-rows: minmax(160px, 18vw) 30px 20px;
+  grid-template-rows: minmax(116px, 13vw) clamp(54px, 5vw, 86px);
   align-items: center;
   justify-items: center;
   padding: 0 14px;
@@ -148,6 +149,7 @@ a {
 }
 
 .work-card h2 {
+  display: none;
   color: var(--ink);
   font-size: clamp(11px, 0.72vw, 14px);
   font-weight: 300;
@@ -375,7 +377,7 @@ a {
   }
 
   .work-card {
-    grid-template-rows: minmax(150px, 24vw) 30px 20px;
+    grid-template-rows: minmax(108px, 17vw) 48px;
   }
 }
 
@@ -410,11 +412,11 @@ a {
 
   .work-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 42px;
+    row-gap: 0;
   }
 
   .work-card {
-    grid-template-rows: 140px 28px 24px;
+    grid-template-rows: 106px 42px;
     padding: 0 8px;
   }
 
@@ -423,8 +425,7 @@ a {
   }
 
   .work-card h2 {
-    font-size: 12px;
-    opacity: 1;
+    display: none;
   }
 
   .work-visual {
