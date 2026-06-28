@@ -30,5 +30,5 @@
 - Enable Lenis only on desktop/fine pointer and leave native scroll as fallback for mobile, reduced-motion users, and CDN failure.
 - Do not use `cferdinandi/smooth-scroll` for page-wide smooth scrolling because it targets anchor-link animation, not ordinary wheel/trackpad smoothing.
 - Increase Lenis wheel speed by 25% from the first trial: `wheelMultiplier` changed from `0.75` to `0.9375`.
-- Make the desktop fleur-de-lis cursor rotate toward the nearest `.work-visual` and invert visually using blend mode.
-- Clamp cursor rotation to `-45deg..45deg` so it only leans left or right, and use slower smoothing for a calmer motion.
+- Make the desktop fleur-de-lis cursor rotate from mouse movement inertia, not from nearest-object aiming.
+- Clamp cursor rotation to `-45deg..45deg` so it only leans left or right, then smoothly returns to center.

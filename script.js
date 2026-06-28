@@ -22,9 +22,10 @@ function initFleurCursor() {
   let targetY = currentY;
   let currentRotation = 0;
   let targetRotation = 0;
+  let lastPointerX = currentX;
+  let lastPointerTime = 0;
   let hovering = false;
   let pressed = false;
-  let visualTargets = Array.from(document.querySelectorAll(".work-visual"));
 
   const isInteractive = (element) => Boolean(
     element?.closest("a[href], button, [role='button'], [data-href], [data-url]"),
@@ -35,37 +36,23 @@ function initFleurCursor() {
     cursor.classList.toggle("is-pressed", pressed);
   };
 
-  const getNearestVisualAngle = () => {
-    let nearestDistance = Infinity;
-    let nearestAngle = targetRotation;
-
-    visualTargets.forEach((element) => {
-      const rect = element.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = centerX - currentX;
-      const deltaY = centerY - currentY;
-      const distance = deltaX * deltaX + deltaY * deltaY;
-
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        const horizontalBias = Math.atan2(deltaX, Math.max(120, Math.abs(deltaY))) * 180 / Math.PI;
-        nearestAngle = Math.max(-45, Math.min(45, horizontalBias));
-      }
-    });
-
-    return nearestAngle;
-  };
+  const clamp = (value, min, max) => Math.max(min, Math.min(value, max));
 
   const rotateToward = (current, target) => {
     const delta = ((target - current + 540) % 360) - 180;
-    return current + delta * 0.06;
+    const speedRatio = Math.min(Math.abs(target) / 45, 1);
+    return current + delta * (0.12 + speedRatio * 0.14);
   };
 
   const tick = () => {
     currentX += (targetX - currentX) / 4;
     currentY += (targetY - currentY) / 4;
-    targetRotation = getNearestVisualAngle();
+    targetRotation *= 0.9;
+
+    if (Math.abs(targetRotation) < 0.05) {
+      targetRotation = 0;
+    }
+
     currentRotation = rotateToward(currentRotation, targetRotation);
     cursor.style.left = `${currentX}px`;
     cursor.style.top = `${currentY}px`;
@@ -74,8 +61,16 @@ function initFleurCursor() {
   };
 
   document.addEventListener("mousemove", (event) => {
+    const time = event.timeStamp || performance.now();
+    const deltaTime = lastPointerTime ? Math.max(16, time - lastPointerTime) : 16;
+    const deltaX = event.clientX - lastPointerX;
+    const velocityX = deltaX / deltaTime;
+
     targetX = event.clientX;
     targetY = event.clientY;
+    targetRotation = clamp(velocityX * 30, -45, 45);
+    lastPointerX = event.clientX;
+    lastPointerTime = time;
     cursor.classList.add("is-visible");
     hovering = isInteractive(event.target);
     syncState();
@@ -109,10 +104,6 @@ function initFleurCursor() {
 
   document.addEventListener("mouseenter", () => {
     cursor.classList.add("is-visible");
-  });
-
-  window.addEventListener("resize", () => {
-    visualTargets = Array.from(document.querySelectorAll(".work-visual"));
   });
 
   tick();

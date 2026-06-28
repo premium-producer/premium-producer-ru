@@ -60,3 +60,4 @@
 - Added pinned Lenis 1.3.25 from jsDelivr for a controlled desktop smooth-scroll trial while keeping native scroll as the fallback for mobile, reduced-motion, or CDN failure.
 - Made the desktop fleur-de-lis cursor rotate smoothly toward the nearest work visual, inverted it with blend mode, and increased Lenis wheel speed by 25%.
 - Restricted the fleur-de-lis cursor aiming rotation to a horizontal `-45deg..45deg` range and made the rotation smoothing twice as slow.
+- Replaced object-aiming cursor rotation with inertial mouse-movement rotation: horizontal velocity sets a `-45deg..45deg` lean, then the cursor smoothly returns to center.
