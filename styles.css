@@ -5,7 +5,7 @@
   --soft: #d6d6d6;
   --muted: #969696;
   --tile: #f3f3f3;
-  --fleur-cursor: url("./public/fleur-cursor.svg") 16 16;
+  --fleur-cursor: url("./public/fleur-cursor.svg") 10 10;
 }
 
 * {
@@ -34,6 +34,44 @@ body {
 a {
   color: inherit;
   cursor: var(--fleur-cursor), pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html,
+  html *,
+  body,
+  body * {
+    cursor: none !important;
+  }
+
+  .fleur-cursor {
+    width: 21px;
+    height: 21px;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999999;
+    background: url("./public/fleur-cursor.svg") center / contain no-repeat;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+    will-change: left, top, transform, opacity;
+  }
+
+  .fleur-cursor.is-visible {
+    opacity: 1;
+  }
+
+  .fleur-cursor.is-hovering {
+    transform: translate(-50%, -50%) scale(1.75);
+  }
+
+  .fleur-cursor.is-pressed {
+    transform: translate(-50%, -50%) scale(1.25);
+  }
 }
 
 .site-header {

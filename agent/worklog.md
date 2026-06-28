@@ -54,3 +54,5 @@
 - Added overscroll blocking, a gentle clamped wheel-scroll script, and a fleur-de-lis cursor.
 - Replaced the inline text-symbol cursor with a generated `public/fleur-cursor.svg` based on the user-provided fleur-de-lis SVG reference.
 - Removed the custom wheel-scroll script while keeping CSS overscroll blocking at page boundaries.
+- Reviewed the pasted scroll/cursor scripts: kept native scrolling, did not reintroduce the heavy `preventDefault` smooth-scroll script, and reduced the fleur-de-lis cursor asset from 32px to 21px.
+- Reintroduced a desktop-only `preventDefault` smooth-scroll experiment based on the pasted script and added an animated fleur-de-lis DOM cursor with hover and press states.
