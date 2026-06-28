@@ -1,6 +1,6 @@
 # Next Steps
 
-1. Replace current DNS A record `95.163.244.138` with GitHub Pages A records.
-2. Wait for DNS propagation.
-3. Enable HTTPS in GitHub Pages after DNS verification.
+1. Wait for DNS propagation and verify `премиум-продюсер.рф` resolves to GitHub Pages IPs.
+2. Enable HTTPS in GitHub Pages after DNS verification.
+3. Optionally add `www` routing if the user wants `www.премиум-продюсер.рф` to work.
 4. Replace placeholder social links with real Telegram, YouTube, Instagram, and email/contact URLs.

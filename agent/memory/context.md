@@ -34,4 +34,11 @@ The GitHub repository was created by the user through the GitHub web UI. Initial
 
 The current site is a static Linktree-style page designed to be published from branch `main`, folder `/root`.
 
-GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. Current DNS still points to `95.163.244.138`, so the domain is not yet routed to GitHub Pages.
+GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. Reg.ru DNS resource records were updated in the UI to:
+
+- `A @ 185.199.108.153`
+- `A @ 185.199.109.153`
+- `A @ 185.199.110.153`
+- `A @ 185.199.111.153`
+
+Immediately after the UI update, external DNS still returned old address `95.163.244.138`; wait for propagation before enabling HTTPS.

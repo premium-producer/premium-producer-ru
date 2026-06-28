@@ -26,3 +26,5 @@
 - Enabled GitHub Pages from branch `main`, folder `/root`.
 - Confirmed GitHub Pages status is `built`.
 - Checked DNS for `xn----htbbcmxbrdffgdmx6p.xn--p1ai`; it currently resolves to `95.163.244.138`, not GitHub Pages.
+- Updated Reg.ru DNS resource records in the UI to four GitHub Pages `A @` records.
+- External DNS checks still return the old `95.163.244.138` address immediately after the UI change; waiting for propagation.
