@@ -50,3 +50,4 @@
 - Made the works grid more compact to better match the Yeezy reference: smaller objects, shorter rows, tighter gaps, and a new CSS cache-buster.
 - Rebalanced vertical spacing so work codes sit between rows with comparable whitespace above and below.
 - Removed hidden project-title rows from the grid layout so the object-code-next-object spacing stays balanced.
+- Added five more desktop rows of work cards and a minimal footer with CONTACT, TERMS, PRIVACY, ACCESSIBILITY, DNSMPI, COOKIES, and ORDER STATUS links.
