@@ -29,3 +29,6 @@
 - Updated Reg.ru DNS resource records in the UI to four GitHub Pages `A @` records.
 - External DNS checks still return the old `95.163.244.138` address immediately after the UI change; waiting for propagation.
 - Temporarily removed the `CNAME` file so GitHub Pages can serve the site at `https://premium-producer.github.io/premium-producer-ru/` while custom domain DNS propagates.
+- Removed the custom domain from GitHub Pages settings through the GitHub API.
+- Verified `https://premium-producer.github.io/premium-producer-ru/index.html` returns the deployed site with `200 OK`.
+- The root project URL may still redirect until GitHub/Fastly cache expires.

@@ -8,7 +8,7 @@ Basic Linktree-style static site is prepared for GitHub Pages.
 
 Temporary live URL:
 
-https://premium-producer.github.io/premium-producer-ru/
+https://premium-producer.github.io/premium-producer-ru/index.html
 
 Local preview:
 

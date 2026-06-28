@@ -16,7 +16,7 @@ The repository was made public and GitHub Pages was enabled successfully.
 Temporary live URL while custom domain DNS propagates:
 
 ```text
-https://premium-producer.github.io/premium-producer-ru/
+https://premium-producer.github.io/premium-producer-ru/index.html
 ```
 
 ```text

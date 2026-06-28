@@ -36,7 +36,7 @@ The current site is a static Linktree-style page designed to be published from b
 
 Temporary GitHub Pages URL while custom domain DNS propagates:
 
-`https://premium-producer.github.io/premium-producer-ru/`
+`https://premium-producer.github.io/premium-producer-ru/index.html`
 
 GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. Reg.ru DNS resource records were updated in the UI to:
 
@@ -47,4 +47,4 @@ GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. R
 
 Immediately after the UI update, external DNS still returned old address `95.163.244.138`; wait for propagation before enabling HTTPS.
 
-The root `CNAME` file was temporarily removed so GitHub Pages stops redirecting the default project URL to the custom domain. Restore `CNAME` with `xn----htbbcmxbrdffgdmx6p.xn--p1ai` after DNS propagation.
+The root `CNAME` file was temporarily removed and the custom domain was removed from GitHub Pages settings so GitHub Pages stops redirecting the default project URL to the custom domain. `index.html` works now; the root project URL may still redirect until GitHub/Fastly cache expires. Restore `CNAME` with `xn----htbbcmxbrdffgdmx6p.xn--p1ai` after DNS propagation.
