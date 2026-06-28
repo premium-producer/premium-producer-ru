@@ -128,7 +128,7 @@ a {
 .work-card {
   min-width: 0;
   display: grid;
-  grid-template-rows: 36px minmax(220px, 26vw) 36px;
+  grid-template-rows: minmax(220px, 26vw) 36px 24px;
   align-items: center;
   justify-items: center;
   padding: 0 14px;
@@ -370,7 +370,7 @@ a {
   }
 
   .work-card {
-    grid-template-rows: 34px minmax(210px, 30vw) 34px;
+    grid-template-rows: minmax(210px, 30vw) 34px 24px;
   }
 }
 
@@ -409,7 +409,7 @@ a {
   }
 
   .work-card {
-    grid-template-rows: 30px 178px 28px;
+    grid-template-rows: 178px 30px 28px;
     padding: 0 8px;
   }
 

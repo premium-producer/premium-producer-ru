@@ -42,3 +42,6 @@
 - Replaced the Linktree page with a minimalist Yeezy-inspired portfolio grid for works.
 - Updated README to describe the current works catalog instead of the earlier Linktree version.
 - Added a CSS cache-buster query string after the browser showed the new HTML with stale cached CSS.
+- Moved project codes such as `PR-01` below each work object to match the reference layout.
+- Added ignored local-only storage under `agent/local/` for user data that must not be pushed to the public repository.
+- Bumped the CSS cache-buster after changing work card label placement.
