@@ -58,6 +58,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - Native Mac scrolling felt too plain, but the first custom `preventDefault` wheel implementation felt bad on Mac trackpad. Current trial uses Lenis instead.
 - Custom cursor should be a small heraldic fleur-de-lis. Current SVG size is `21x21`, about 1.5x smaller than the earlier `32x32`.
 - Desktop cursor should smoothly rotate toward the nearest work visual/object and use color inversion (`filter: invert(1)` with `mix-blend-mode: difference`) rather than staying visually static.
+- Cursor rotation must stay subtle and horizontal only: clamp aiming to `-45deg..45deg`, avoiding full flips downward/upward.
 - Mobile/touch devices should avoid custom cursor and avoid forced smooth-scroll behavior.
 
 ## Deployment And Domain

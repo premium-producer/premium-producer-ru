@@ -49,7 +49,8 @@ function initFleurCursor() {
 
       if (distance < nearestDistance) {
         nearestDistance = distance;
-        nearestAngle = Math.atan2(deltaY, deltaX) * 180 / Math.PI + 90;
+        const horizontalBias = Math.atan2(deltaX, Math.max(120, Math.abs(deltaY))) * 180 / Math.PI;
+        nearestAngle = Math.max(-45, Math.min(45, horizontalBias));
       }
     });
 
@@ -58,7 +59,7 @@ function initFleurCursor() {
 
   const rotateToward = (current, target) => {
     const delta = ((target - current + 540) % 360) - 180;
-    return current + delta * 0.12;
+    return current + delta * 0.06;
   };
 
   const tick = () => {
