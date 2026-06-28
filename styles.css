@@ -119,19 +119,19 @@ a {
 }
 
 .work-page {
-  padding: 122px 0 62px;
+  padding: 112px 0 54px;
 }
 
 .work-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  row-gap: clamp(64px, 9vw, 118px);
+  row-gap: clamp(42px, 4.6vw, 82px);
 }
 
 .work-card {
   min-width: 0;
   display: grid;
-  grid-template-rows: minmax(220px, 26vw) 36px 24px;
+  grid-template-rows: minmax(160px, 18vw) 30px 20px;
   align-items: center;
   justify-items: center;
   padding: 0 14px;
@@ -140,7 +140,7 @@ a {
 .work-code,
 .work-card h2 {
   margin: 0;
-  font-size: clamp(18px, 1.35vw, 27px);
+  font-size: clamp(16px, 1.18vw, 23px);
   font-weight: 300;
   line-height: 1;
   text-align: center;
@@ -149,7 +149,7 @@ a {
 
 .work-card h2 {
   color: var(--ink);
-  font-size: clamp(13px, 0.96vw, 18px);
+  font-size: clamp(11px, 0.72vw, 14px);
   font-weight: 300;
   opacity: 0;
   transition: opacity 160ms ease;
@@ -161,20 +161,21 @@ a {
 }
 
 .work-visual {
-  width: min(84%, 260px);
-  height: min(72%, 260px);
-  min-height: 140px;
+  width: min(72%, 220px);
+  height: min(64%, 210px);
+  min-height: 108px;
   position: relative;
   display: grid;
   place-items: center;
   text-decoration: none;
-  transform: translateZ(0);
+  transform: scale(0.72);
+  transform-origin: center;
   transition: transform 150ms ease, filter 150ms ease;
 }
 
 .work-visual:hover,
 .work-visual:focus-visible {
-  transform: translateY(-4px);
+  transform: translateY(-3px) scale(0.72);
   filter: contrast(1.08);
   outline: none;
 }
@@ -374,7 +375,7 @@ a {
   }
 
   .work-card {
-    grid-template-rows: minmax(210px, 30vw) 34px 24px;
+    grid-template-rows: minmax(150px, 24vw) 30px 20px;
   }
 }
 
@@ -404,21 +405,21 @@ a {
   }
 
   .work-page {
-    padding-top: 126px;
+    padding-top: 118px;
   }
 
   .work-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 54px;
+    row-gap: 42px;
   }
 
   .work-card {
-    grid-template-rows: 178px 30px 28px;
+    grid-template-rows: 140px 28px 24px;
     padding: 0 8px;
   }
 
   .work-code {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .work-card h2 {
@@ -427,14 +428,14 @@ a {
   }
 
   .work-visual {
-    width: min(88%, 164px);
-    height: 150px;
-    min-height: 120px;
-    transform: scale(0.78);
+    width: min(80%, 148px);
+    height: 132px;
+    min-height: 96px;
+    transform: scale(0.68);
   }
 
   .work-visual:hover,
   .work-visual:focus-visible {
-    transform: translateY(-3px) scale(0.78);
+    transform: translateY(-3px) scale(0.68);
   }
 }

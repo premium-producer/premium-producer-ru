@@ -47,3 +47,4 @@
 - Bumped the CSS cache-buster after changing work card label placement.
 - Switched the site typography to Google Fonts Outfit and bumped the CSS cache-buster.
 - Reduced typography weights for a thinner minimalist look and corrected all `mailto:` links to `hello@premium-producer.ru`.
+- Made the works grid more compact to better match the Yeezy reference: smaller objects, shorter rows, tighter gaps, and a new CSS cache-buster.
