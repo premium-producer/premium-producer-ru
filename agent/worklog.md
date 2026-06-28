@@ -45,3 +45,4 @@
 - Moved project codes such as `PR-01` below each work object to match the reference layout.
 - Added ignored local-only storage under `agent/local/` for user data that must not be pushed to the public repository.
 - Bumped the CSS cache-buster after changing work card label placement.
+- Switched the site typography to Google Fonts Outfit and bumped the CSS cache-buster.
