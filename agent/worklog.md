@@ -39,3 +39,5 @@
 - Pushed the restored custom domain configuration to `origin/main`.
 - Verified `https://премиум-продюсер.рф/` returns the deployed GitHub Pages site with `200 OK`.
 - Verified `https://www.премиум-продюсер.рф/` redirects to the apex HTTPS domain.
+- Replaced the Linktree page with a minimalist Yeezy-inspired portfolio grid for works.
+- Updated README to describe the current works catalog instead of the earlier Linktree version.

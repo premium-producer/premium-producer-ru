@@ -13,3 +13,4 @@
 - Make the GitHub repository public so GitHub Pages can be used on the free plan.
 - Temporarily disable the custom domain by removing `CNAME` until DNS propagation completes.
 - Restore the custom domain after public DNS resolves to GitHub Pages.
+- Use a Yeezy-inspired sparse catalog layout for works, without copying the brand or product imagery directly.

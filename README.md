@@ -4,7 +4,7 @@ Personal website project for the domain `премиум-продюсер.рф`.
 
 ## Current status
 
-Static personal Linktree-style site is published with GitHub Pages.
+Static minimalist works catalog is published with GitHub Pages.
 
 Live URL:
 

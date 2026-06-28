@@ -32,7 +32,7 @@ Replace placeholder social links with real Telegram, YouTube, Instagram, and ema
 
 The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app, then local HTTPS credentials were configured through macOS Keychain. Direct `git push` now works. The repository is now public so GitHub Pages can be used on the free plan.
 
-The current site is a static Linktree-style page designed to be published from branch `main`, folder `/root`.
+The current site is a static minimalist works catalog inspired by the sparse Yeezy product grid, adapted as a portfolio rather than a store. It is designed to be published from branch `main`, folder `/root`.
 
 GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. Reg.ru DNS resource records were updated in the UI to:
 
