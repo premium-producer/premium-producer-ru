@@ -25,4 +25,4 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 
 Define the site positioning, content structure, and technology stack.
 
-The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app because direct `git push` is blocked by missing local HTTPS credentials.
+The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app, then local HTTPS credentials were configured through macOS Keychain. Direct `git push` now works.

@@ -12,3 +12,6 @@
 - Configured local `origin` as `https://github.com/premium-producer/premium-producer-ru.git`.
 - Direct `git push` is blocked until local GitHub HTTPS credentials are configured.
 - Uploaded the initial project files to GitHub through the connected GitHub app.
+- Configured macOS Keychain HTTPS credentials for GitHub.
+- Reconciled the API-created GitHub history with local git history.
+- Verified direct `git push` works from the terminal.
