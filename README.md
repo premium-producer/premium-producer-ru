@@ -6,6 +6,10 @@ Personal website project for the domain `премиум-продюсер.рф`.
 
 Basic Linktree-style static site is prepared for GitHub Pages.
 
+Temporary live URL:
+
+https://premium-producer.github.io/premium-producer-ru/
+
 Local preview:
 
 ```bash

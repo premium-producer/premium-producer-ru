@@ -13,9 +13,15 @@ Status: enabled.
 
 The repository was made public and GitHub Pages was enabled successfully.
 
+Temporary live URL while custom domain DNS propagates:
+
+```text
+https://premium-producer.github.io/premium-producer-ru/
+```
+
 ```text
 source: main / root
-custom domain: xn----htbbcmxbrdffgdmx6p.xn--p1ai
+custom domain: temporarily disabled
 status: built
 ```
 
@@ -59,10 +65,24 @@ DNS propagation can take up to 24 hours.
 
 ## Current DNS Status
 
-As of 2026-06-28, `xn----htbbcmxbrdffgdmx6p.xn--p1ai` resolves to:
+As of 2026-06-28, the Reg.ru authoritative nameservers are configured with GitHub Pages records:
 
 ```text
-95.163.244.138
+A @ 185.199.108.153
+A @ 185.199.109.153
+A @ 185.199.110.153
+A @ 185.199.111.153
+CNAME www premium-producer.github.io.
 ```
 
-This is not a GitHub Pages IP. Update DNS records at the domain registrar.
+Public DNS caches may still return the old `95.163.244.138` address until propagation finishes.
+
+## Re-enable Custom Domain
+
+After DNS propagation, restore the root `CNAME` file with:
+
+```text
+xn----htbbcmxbrdffgdmx6p.xn--p1ai
+```
+
+Then commit and push. GitHub Pages should switch back to the custom domain, and HTTPS can be enforced after GitHub verifies DNS.
