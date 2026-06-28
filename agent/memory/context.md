@@ -23,6 +23,6 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 
 ## Next Likely Step
 
-Upload the initial files to private GitHub repository `premium-producer/premium-producer-ru` through the connected GitHub app, since direct `git push` is blocked by missing local HTTPS credentials.
+Define the site positioning, content structure, and technology stack.
 
-The GitHub repository was created by the user through the GitHub web UI.
+The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app because direct `git push` is blocked by missing local HTTPS credentials.
