@@ -5,7 +5,7 @@
   --soft: #d6d6d6;
   --muted: #969696;
   --tile: #f3f3f3;
-  --fleur-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='none'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='26' fill='black'%3E%E2%9A%9C%3C/text%3E%3C/svg%3E") 16 16;
+  --fleur-cursor: url("./public/fleur-cursor.svg") 16 16;
 }
 
 * {

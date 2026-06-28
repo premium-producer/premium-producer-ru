@@ -52,3 +52,5 @@
 - Removed hidden project-title rows from the grid layout so the object-code-next-object spacing stays balanced.
 - Added five more desktop rows of work cards and a minimal footer with CONTACT, TERMS, PRIVACY, ACCESSIBILITY, DNSMPI, COOKIES, and ORDER STATUS links.
 - Added overscroll blocking, a gentle clamped wheel-scroll script, and a fleur-de-lis cursor.
+- Replaced the inline text-symbol cursor with a generated `public/fleur-cursor.svg` based on the user-provided fleur-de-lis SVG reference.
+- Removed the custom wheel-scroll script while keeping CSS overscroll blocking at page boundaries.
