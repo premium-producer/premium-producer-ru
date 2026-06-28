@@ -28,8 +28,10 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 
 ## Next Likely Step
 
-Enable GitHub Pages for `premium-producer/premium-producer-ru`, configure DNS records for `премиум-продюсер.рф`, and replace placeholder social links with real URLs.
+Choose a deployment path that supports a private GitHub repository, or make the repository public if GitHub Pages should be used.
 
 The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app, then local HTTPS credentials were configured through macOS Keychain. Direct `git push` now works.
 
 The current site is a static Linktree-style page designed to be published from branch `main`, folder `/root`.
+
+GitHub Pages enablement was attempted through the GitHub API and returned: `Your current plan does not support GitHub Pages for this repository.`

@@ -9,6 +9,16 @@
 
 ## GitHub Pages Settings
 
+Status: blocked for the current private repository plan.
+
+GitHub API returned:
+
+```text
+Your current plan does not support GitHub Pages for this repository.
+```
+
+To use GitHub Pages, either make the repository public or use a GitHub plan that supports Pages for private repositories.
+
 In GitHub:
 
 1. Open `premium-producer/premium-producer-ru`.
@@ -47,3 +57,12 @@ www  CNAME  premium-producer.github.io
 
 DNS propagation can take up to 24 hours.
 
+## Private Repository Alternatives
+
+If the repository must stay private, use one of these deployment targets instead:
+
+- Vercel
+- Cloudflare Pages
+- Netlify
+
+All three can deploy a static HTML/CSS site and connect a custom domain while keeping the GitHub repository private.

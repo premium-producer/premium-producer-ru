@@ -18,3 +18,6 @@
 - Created a basic Linktree-style static site.
 - Added GitHub Pages support files: `CNAME`, `.nojekyll`, and deployment notes.
 - Verified the static site locally at `http://localhost:4173/`.
+- Pushed the Linktree site to GitHub.
+- Tried to enable GitHub Pages through GitHub API.
+- GitHub Pages is blocked because the current plan does not support Pages for this private repository.

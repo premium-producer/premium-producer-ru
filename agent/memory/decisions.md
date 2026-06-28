@@ -10,3 +10,4 @@
 - Use a plain static HTML/CSS site for the first Linktree version.
 - Use GitHub Pages as the initial deployment target.
 - Use Punycode `xn----htbbcmxbrdffgdmx6p.xn--p1ai` for the custom domain config.
+- Keep the GitHub repository private unless the user explicitly chooses otherwise.
