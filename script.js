@@ -1,8 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (finePointer) {
     initFleurCursor();
+  }
+
+  if (finePointer && !reduceMotion && window.innerWidth >= 1025) {
+    initLenisScroll();
   }
 });
 
@@ -74,4 +79,25 @@ function initFleurCursor() {
   });
 
   tick();
+}
+
+function initLenisScroll() {
+  if (!window.Lenis) {
+    return;
+  }
+
+  const lenis = new window.Lenis({
+    autoRaf: true,
+    autoResize: true,
+    smoothWheel: true,
+    syncTouch: false,
+    lerp: 0.08,
+    wheelMultiplier: 0.75,
+    touchMultiplier: 1,
+    anchors: {
+      offset: -60,
+    },
+  });
+
+  window.premiumProducerLenis = lenis;
 }
