@@ -1,4 +1,8 @@
 # Next Steps
 
-1. Enable `Enforce HTTPS` in GitHub Pages settings if `http://премиум-продюсер.рф/` does not redirect to HTTPS automatically.
-2. Replace placeholder social links with real Telegram, YouTube, Instagram, and email/contact URLs.
+1. Test Lenis smooth scroll on the user's Mac trackpad at `https://премиум-продюсер.рф/`; tune `lerp` and `wheelMultiplier` in `script.js` if it feels too heavy, too slippery, or too delayed.
+2. Replace abstract placeholder visuals with real work images/assets when available.
+3. Add detailed project cards or project pages for each work item.
+4. Decide whether the next architecture step should stay static or move to Next.js/static export once content structure becomes data-driven.
+5. Replace or confirm footer/header links: GitHub, contact, terms, privacy, accessibility, cookies, order status.
+6. Configure git author name/email if desired; commits currently use automatically detected local identity.
