@@ -51,3 +51,4 @@
 - Rebalanced vertical spacing so work codes sit between rows with comparable whitespace above and below.
 - Removed hidden project-title rows from the grid layout so the object-code-next-object spacing stays balanced.
 - Added five more desktop rows of work cards and a minimal footer with CONTACT, TERMS, PRIVACY, ACCESSIBILITY, DNSMPI, COOKIES, and ORDER STATUS links.
+- Added overscroll blocking, a gentle clamped wheel-scroll script, and a fleur-de-lis cursor.
