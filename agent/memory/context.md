@@ -16,11 +16,13 @@ GitHub owner detected through the connected GitHub app: `premium-producer`.
 - `agent/project-brief.md`
 - `agent/worklog.md`
 - `agent/memory/context.md`
+- `agent/memory/decisions.md`
+- `agent/memory/next-steps.md`
 - `src/`
 - `public/`
 
 ## Next Likely Step
 
-Connect private GitHub repository `premium-producer/premium-producer-ru` as `origin` and push `main`.
+Upload the initial files to private GitHub repository `premium-producer/premium-producer-ru` through the connected GitHub app, since direct `git push` is blocked by missing local HTTPS credentials.
 
 The GitHub repository was created by the user through the GitHub web UI.
