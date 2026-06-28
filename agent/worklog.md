@@ -11,3 +11,4 @@
 - User created private GitHub repository `premium-producer/premium-producer-ru`.
 - Configured local `origin` as `https://github.com/premium-producer/premium-producer-ru.git`.
 - Direct `git push` is blocked until local GitHub HTTPS credentials are configured.
+- Uploaded the initial project files to GitHub through the connected GitHub app.
