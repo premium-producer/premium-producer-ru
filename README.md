@@ -4,5 +4,14 @@ Personal website project for the domain `премиум-продюсер.рф`.
 
 ## Current status
 
-Initial project structure is prepared. The visual concept, technology stack, content, and deployment target will be defined in the next steps.
+Basic Linktree-style static site is prepared for GitHub Pages.
 
+Local preview:
+
+```bash
+python3 -m http.server 4173
+```
+
+## Deployment
+
+See `docs/deploy-github-pages.md`.

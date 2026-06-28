@@ -15,3 +15,6 @@
 - Configured macOS Keychain HTTPS credentials for GitHub.
 - Reconciled the API-created GitHub history with local git history.
 - Verified direct `git push` works from the terminal.
+- Created a basic Linktree-style static site.
+- Added GitHub Pages support files: `CNAME`, `.nojekyll`, and deployment notes.
+- Verified the static site locally at `http://localhost:4173/`.

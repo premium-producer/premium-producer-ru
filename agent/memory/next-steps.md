@@ -1,6 +1,6 @@
 # Next Steps
 
-1. Define positioning and audience for the personal site.
-2. Choose the site stack.
-3. Create the initial website implementation.
-4. Choose deployment target and connect the domain `премиум-продюсер.рф`.
+1. Enable GitHub Pages in repository settings: branch `main`, folder `/root`.
+2. Add DNS records for `премиум-продюсер.рф`.
+3. Replace placeholder social links with real Telegram, YouTube, Instagram, and email/contact URLs.
+4. Enable HTTPS in GitHub Pages after DNS verification.
