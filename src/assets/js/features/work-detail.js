@@ -130,6 +130,15 @@ export function initWorkDetailView() {
     updateMediaControls();
   };
 
+  const switchDetailVisual = (renderFrame) => {
+    detail.classList.remove("is-switching");
+    renderFrame();
+    detail.offsetWidth;
+    window.requestAnimationFrame(() => {
+      detail.classList.add("is-switching");
+    });
+  };
+
   const moveMedia = (direction) => {
     const total = activeMediaAssets.length;
 
@@ -138,11 +147,7 @@ export function initWorkDetailView() {
     }
 
     activeMediaIndex = getNormalizedIndex(activeMediaIndex + direction, total);
-    detail.classList.remove("is-switching");
-    renderMediaFrame();
-    window.requestAnimationFrame(() => {
-      detail.classList.add("is-switching");
-    });
+    switchDetailVisual(renderMediaFrame);
   };
 
   const render = () => {
@@ -205,11 +210,7 @@ export function initWorkDetailView() {
 
   const move = (direction) => {
     activeIndex = (activeIndex + direction + cards.length) % cards.length;
-    detail.classList.remove("is-switching");
-    render();
-    window.requestAnimationFrame(() => {
-      detail.classList.add("is-switching");
-    });
+    switchDetailVisual(render);
   };
 
   const handleSwipeStart = (event) => {
