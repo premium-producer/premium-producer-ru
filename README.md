@@ -6,11 +6,12 @@ Personal website project for the domain `премиум-продюсер.рф`.
 
 Static minimalist works catalog is published with GitHub Pages.
 
-The frontend stays build-free for GitHub Pages, but assets are organized as
-small modules:
+The repository keeps source files out of the deploy root:
 
-- `assets/css/main.css` imports base layers and component styles.
-- `assets/js/main.js` imports feature modules for the detail view, cursor, and smooth scroll.
+- `src/pages/` contains route source files for `/`, `/black/`, and `/gold/`.
+- `src/assets/css/main.css` imports base layers and component styles.
+- `src/assets/js/main.js` imports feature modules for the detail view, cursor, and smooth scroll.
+- `scripts/build-site.mjs` builds the public `dist/` artifact for GitHub Pages.
 
 Live URL:
 
@@ -19,7 +20,7 @@ https://премиум-продюсер.рф/
 Local preview:
 
 ```bash
-python3 -m http.server 4173
+npm run preview
 ```
 
 ## Deployment

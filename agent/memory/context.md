@@ -4,7 +4,7 @@
 
 Date: 2026-06-29
 
-The user is building a personal website for the domain `премиум-продюсер.рф`. The project is maintained in GitHub repo `premium-producer/premium-producer-ru`, deployed through GitHub Pages from `main` branch and repository root.
+The user is building a personal website for the domain `премиум-продюсер.рф`. The project is maintained in GitHub repo `premium-producer/premium-producer-ru`, deployed through GitHub Pages via a GitHub Actions workflow that publishes the generated `dist/` artifact.
 
 The site started as a Linktree-style page, then shifted into a minimalist portfolio/catalog inspired by the sparse Yeezy product grid: large white field, fixed minimal header, 6-column desktop work grid, object-like abstract visuals, short work codes under objects, and minimal footer links.
 
@@ -13,18 +13,23 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 ## Current Structure
 
 - `.gitignore`
-- `.nojekyll`
-- `CNAME`
 - `README.md`
-- `index.html`
-- `black/index.html`
-- `gold/index.html`
-- `assets/README.md`
-- `assets/css/main.css`
-- `assets/css/base/`
-- `assets/css/components/`
-- `assets/js/main.js`
-- `assets/js/features/`
+- `package.json`
+- `.github/workflows/pages.yml`
+- `scripts/build-site.mjs`
+- `src/pages/index.html`
+- `src/pages/black/index.html`
+- `src/pages/gold/index.html`
+- `src/assets/README.md`
+- `src/assets/css/main.css`
+- `src/assets/css/base/`
+- `src/assets/css/components/`
+- `src/assets/js/main.js`
+- `src/assets/js/features/`
+- `src/static/CNAME`
+- `src/static/.nojekyll`
+- `src/static/robots.txt`
+- `src/static/sitemap.xml`
 - `docs/deploy-github-pages.md`
 - `agent/README.md`
 - `agent/project-brief.md`
@@ -38,15 +43,16 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 
 ## Current Architecture
 
-- Static website, no build step.
-- Main entry: `index.html`.
-- Theme route entries: `black/index.html` and `gold/index.html`.
-- Styling: `assets/css/main.css`, split into base layers and component styles.
-- Behavior: `assets/js/main.js`, split into feature modules.
+- Static website with a small build step that copies source files into `dist/`.
+- Main route source: `src/pages/index.html`.
+- Theme route sources: `src/pages/black/index.html` and `src/pages/gold/index.html`.
+- Styling: `src/assets/css/main.css`, split into base layers and component styles.
+- Behavior: `src/assets/js/main.js`, split into feature modules.
 - Static assets: `public/`.
-- GitHub Pages publishes from branch `main`, folder `/root`.
-- Domain configured through root `CNAME`: `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
-- Local preview command: `python3 -m http.server <port>`.
+- Deploy-only static files: `src/static/`.
+- GitHub Pages publishes the `dist/` artifact produced by `.github/workflows/pages.yml`.
+- Domain configured through `src/static/CNAME`: `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
+- Local preview command: `npm run preview`.
 
 ## Current Libraries And External Assets
 
@@ -78,7 +84,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 
 The GitHub repository was created by the user through the GitHub web UI. Initial files were uploaded through the connected GitHub app, then local HTTPS credentials were configured through macOS Keychain. Direct `git push` now works. The repository is now public so GitHub Pages can be used on the free plan.
 
-GitHub Pages is enabled from branch `main`, folder `/root`; status is `built`. Reg.ru DNS resource records were updated in the UI to:
+GitHub Pages deploys from a GitHub Actions artifact generated from `dist/`. Reg.ru DNS resource records were updated in the UI to:
 
 - `A @ 185.199.108.153`
 - `A @ 185.199.109.153`

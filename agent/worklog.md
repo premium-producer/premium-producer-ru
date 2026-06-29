@@ -77,3 +77,4 @@
 - Removed automatic two-cell project cards; the catalog grid now uses four columns on desktop and every work item stays inside one grid cell.
 - Hid the browser scrollbar and removed the reserved scrollbar gutter while preserving normal page scrolling.
 - Refactored the frontend architecture away from root-level monolithic `styles.css` and `script.js`: CSS now loads through `assets/css/main.css` with base/component layers, JavaScript now loads through `assets/js/main.js` with feature modules for detail view, cursor, and smooth scroll, and the old monolith files were removed.
+- Moved route source files out of the repository root into `src/pages/`, moved frontend assets into `src/assets/`, moved deploy-only files into `src/static/`, and added a build script plus GitHub Pages Actions workflow that publishes the generated `dist/` artifact.

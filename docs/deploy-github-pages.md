@@ -3,7 +3,7 @@
 ## Repository
 
 - GitHub repo: `premium-producer/premium-producer-ru`
-- Publishing source target: branch `main`, folder `/root`
+- Publishing source target: GitHub Actions artifact built from `dist/`
 - Custom domain: `премиум-продюсер.рф`
 - Punycode custom domain: `xn----htbbcmxbrdffgdmx6p.xn--p1ai`
 
@@ -20,7 +20,7 @@ https://премиум-продюсер.рф/
 ```
 
 ```text
-source: main / root
+source: GitHub Actions
 custom domain: xn----htbbcmxbrdffgdmx6p.xn--p1ai
 status: built
 HTTPS: certificate approved; direct HTTPS works
@@ -30,11 +30,21 @@ In GitHub:
 
 1. Open `premium-producer/premium-producer-ru`.
 2. Go to `Settings` -> `Pages`.
-3. Set source to `Deploy from a branch`.
-4. Select branch `main` and folder `/root`.
+3. Set source to `GitHub Actions`.
+4. The workflow `.github/workflows/pages.yml` runs `npm run build` and deploys `dist/`.
 5. Set custom domain to `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
 6. Save.
 7. Enable `Enforce HTTPS` when GitHub allows it.
+
+## Local Build
+
+```bash
+npm run build
+npm run preview
+```
+
+The source pages live in `src/pages/`. The public routes `/`, `/black/`, and
+`/gold/` are generated into `dist/` during deployment.
 
 ## DNS Records
 

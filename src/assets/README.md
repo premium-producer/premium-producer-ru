@@ -5,7 +5,7 @@ This site is intentionally static: GitHub Pages publishes the repository root on
 
 ## CSS
 
-`assets/css/main.css` is the only stylesheet linked from HTML. It composes the
+`src/assets/css/main.css` is the only stylesheet linked from HTML source. It composes the
 site from small layers:
 
 - `base/tokens.css`: color themes and shared design tokens.
@@ -17,8 +17,8 @@ site from small layers:
 
 ## JavaScript
 
-`assets/js/main.js` is the only script module linked from HTML. Feature modules
-live in `assets/js/features/`:
+`src/assets/js/main.js` is the only script module linked from HTML source. Feature modules
+live in `src/assets/js/features/`:
 
 - `work-detail.js`: centered product/detail viewer.
 - `fleur-cursor.js`: custom inverted cursor behavior.
