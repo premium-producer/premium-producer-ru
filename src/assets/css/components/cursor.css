@@ -22,6 +22,7 @@
     --cursor-rotation: 0deg;
     --cursor-speed-scale: 1;
     --cursor-hover-scale: 1;
+    --cursor-anchor-y: 28%;
     width: 19px;
     height: 19px;
     pointer-events: none;
@@ -32,8 +33,9 @@
     background: url("../../../public/fleur-cursor.svg?v=architecture-20260629") center / contain no-repeat;
     mix-blend-mode: difference;
     opacity: 0;
+    transform-origin: 50% var(--cursor-anchor-y);
     transform:
-      translate(-50%, -50%)
+      translate(-50%, calc(-1 * var(--cursor-anchor-y)))
       rotate(var(--cursor-rotation))
       scale(calc(var(--cursor-speed-scale) * var(--cursor-hover-scale)));
     transition:
