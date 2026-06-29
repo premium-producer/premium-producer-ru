@@ -305,7 +305,7 @@ export function initWorkDetailView() {
 
     wheelUnlockTimer = window.setTimeout(() => {
       wheelLocked = false;
-    }, 620);
+    }, 310);
   };
 
   cards.forEach((card, index) => {
