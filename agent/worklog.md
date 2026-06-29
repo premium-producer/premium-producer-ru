@@ -63,3 +63,4 @@
 - Replaced object-aiming cursor rotation with inertial mouse-movement rotation: horizontal velocity sets a `-45deg..45deg` lean, then the cursor smoothly returns to center.
 - Smoothed the desktop cursor link zoom via CSS `@property --cursor-scale` and reduced hover scale from `1.75` to `1.4`.
 - Added explicit crawl/indexing files and metadata for search engines: root `robots.txt`, root `sitemap.xml`, `meta robots` with snippets allowed, stronger title/description, social metadata, and basic `WebSite` JSON-LD.
+- Replaced the first work visual with the `vk_finopolis.png` project reference image copied into `public/project/`.
