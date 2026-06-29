@@ -109,24 +109,29 @@
     padding: 0 58px;
   }
 
-  .detail-gallery {
+  .detail-gallery-shell {
     width: min(74vw, 360px);
     height: min(42vh, 360px);
     min-height: 220px;
   }
 
   .detail-media-arrow {
-    width: 36px;
-    height: 28px;
-    font-size: 29px;
+    width: 34px;
+    height: 22px;
   }
 
   .detail-media-arrow-up {
-    top: 8px;
+    top: -28px;
   }
 
   .detail-media-arrow-down {
-    bottom: 8px;
+    bottom: -28px;
+  }
+
+  .detail-media-arrow::before {
+    width: 15px;
+    height: 15px;
+    border-width: 3px 3px 0 0;
   }
 
   .detail-visual.work-visual,

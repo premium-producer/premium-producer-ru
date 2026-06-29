@@ -19,9 +19,11 @@ export function initWorkDetailView() {
     </div>
     <button class="detail-arrow detail-arrow-prev" type="button" aria-label="Предыдущая работа">‹</button>
     <div class="detail-stage" aria-live="polite">
-      <button class="detail-media-arrow detail-media-arrow-up" type="button" aria-label="Предыдущее фото">⌃</button>
-      <div class="detail-gallery-shell"></div>
-      <button class="detail-media-arrow detail-media-arrow-down" type="button" aria-label="Следующее фото">⌄</button>
+      <div class="detail-gallery-shell">
+        <button class="detail-media-arrow detail-media-arrow-up" type="button" aria-label="Предыдущее фото"></button>
+        <div class="detail-gallery-mount"></div>
+        <button class="detail-media-arrow detail-media-arrow-down" type="button" aria-label="Следующее фото"></button>
+      </div>
     </div>
     <button class="detail-arrow detail-arrow-next" type="button" aria-label="Следующая работа">›</button>
     <div class="detail-meta">
@@ -36,6 +38,7 @@ export function initWorkDetailView() {
 
   const stage = detail.querySelector(".detail-stage");
   const galleryShell = detail.querySelector(".detail-gallery-shell");
+  const galleryMount = detail.querySelector(".detail-gallery-mount");
   const code = detail.querySelector(".detail-code");
   const title = detail.querySelector(".detail-title");
   const dots = detail.querySelector(".detail-dots");
@@ -47,8 +50,9 @@ export function initWorkDetailView() {
   let activeIndex = 0;
   let activeMediaIndex = 0;
   let lastFocusedElement = null;
-  let touchStartX = 0;
-  let touchStartY = 0;
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+  let swipePointerId = null;
 
   const renderDots = () => {
     dots.replaceChildren();
@@ -83,22 +87,21 @@ export function initWorkDetailView() {
   };
 
   const scrollToMedia = (index) => {
-    const gallery = galleryShell.querySelector(".detail-gallery");
+    const gallery = galleryMount.querySelector(".detail-gallery");
 
     if (!gallery?.children.length) {
       return;
     }
 
     activeMediaIndex = (index + gallery.children.length) % gallery.children.length;
-    gallery.children[activeMediaIndex]?.scrollIntoView({
+    gallery.scrollTo({
       behavior: "smooth",
-      block: "nearest",
-      inline: "nearest",
+      top: activeMediaIndex * gallery.clientHeight,
     });
   };
 
   const updateMediaControls = () => {
-    const gallery = galleryShell.querySelector(".detail-gallery");
+    const gallery = galleryMount.querySelector(".detail-gallery");
     const hasMultipleMedia = (gallery?.children.length || 0) > 1;
 
     mediaPrevButton.hidden = !hasMultipleMedia;
@@ -118,6 +121,9 @@ export function initWorkDetailView() {
 
     gallery.className = "detail-gallery";
     activeMediaIndex = 0;
+    gallery.addEventListener("scroll", () => {
+      activeMediaIndex = Math.round(gallery.scrollTop / gallery.clientHeight);
+    }, { passive: true });
 
     galleryAssets.forEach((asset, index) => {
       const slide = document.createElement("figure");
@@ -145,7 +151,7 @@ export function initWorkDetailView() {
       gallery.append(clonedVisual);
     }
 
-    galleryShell.replaceChildren(gallery);
+    galleryMount.replaceChildren(gallery);
     updateMediaControls();
     code.textContent = card.querySelector(".work-code")?.textContent?.trim() || "";
     title.textContent = card.querySelector("h2")?.textContent?.trim() || "";
@@ -173,7 +179,7 @@ export function initWorkDetailView() {
     window.premiumProducerLenis?.start?.();
     window.setTimeout(() => {
       detail.hidden = true;
-      galleryShell.replaceChildren();
+      galleryMount.replaceChildren();
       lastFocusedElement?.focus?.({ preventScroll: true });
     }, 180);
   };
@@ -187,17 +193,48 @@ export function initWorkDetailView() {
     });
   };
 
+  const handleSwipeStart = (event) => {
+    swipePointerId = event.pointerId;
+    swipeStartX = event.clientX;
+    swipeStartY = event.clientY;
+  };
+
+  const handleSwipeEnd = (event) => {
+    if (swipePointerId !== event.pointerId) {
+      return;
+    }
+
+    const deltaX = event.clientX - swipeStartX;
+    const deltaY = event.clientY - swipeStartY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    const swipeThreshold = 34;
+
+    swipePointerId = null;
+
+    if (Math.max(absX, absY) < swipeThreshold) {
+      return;
+    }
+
+    if (absX > absY) {
+      move(deltaX > 0 ? -1 : 1);
+      return;
+    }
+
+    moveMedia(deltaY > 0 ? -1 : 1);
+  };
+
   const handleTouchStart = (event) => {
     const touch = event.changedTouches[0];
 
-    touchStartX = touch.clientX;
-    touchStartY = touch.clientY;
+    swipeStartX = touch.clientX;
+    swipeStartY = touch.clientY;
   };
 
   const handleTouchEnd = (event) => {
     const touch = event.changedTouches[0];
-    const deltaX = touch.clientX - touchStartX;
-    const deltaY = touch.clientY - touchStartY;
+    const deltaX = touch.clientX - swipeStartX;
+    const deltaY = touch.clientY - swipeStartY;
     const absX = Math.abs(deltaX);
     const absY = Math.abs(deltaY);
     const swipeThreshold = 42;
@@ -228,6 +265,11 @@ export function initWorkDetailView() {
   nextButton.addEventListener("click", () => move(1));
   mediaPrevButton.addEventListener("click", () => moveMedia(-1));
   mediaNextButton.addEventListener("click", () => moveMedia(1));
+  stage.addEventListener("pointerdown", handleSwipeStart);
+  stage.addEventListener("pointerup", handleSwipeEnd);
+  stage.addEventListener("pointercancel", () => {
+    swipePointerId = null;
+  });
   detail.addEventListener("click", (event) => {
     if (event.target === detail || event.target === stage) {
       close();
