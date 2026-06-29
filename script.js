@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initFleurCursor();
   }
 
-  initWideProjectCards();
   initWorkDetailView();
 
   if (!reduceMotion) {
@@ -146,32 +145,6 @@ function initWorkDetailView() {
     if (event.key === "ArrowRight") {
       move(1);
     }
-  });
-}
-
-function initWideProjectCards() {
-  const syncImage = (image) => {
-    const card = image.closest(".work-card");
-
-    if (!card) {
-      return;
-    }
-
-    if (image.dataset.gridSpan === "1") {
-      card.classList.remove("work-card-wide");
-      return;
-    }
-
-    card.classList.toggle("work-card-wide", image.naturalWidth > image.naturalHeight);
-  };
-
-  document.querySelectorAll(".work-visual img").forEach((image) => {
-    if (image.complete) {
-      syncImage(image);
-      return;
-    }
-
-    image.addEventListener("load", () => syncImage(image), { once: true });
   });
 }
 
