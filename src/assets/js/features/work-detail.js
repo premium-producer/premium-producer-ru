@@ -38,7 +38,10 @@ export function initWorkDetailView() {
   const prevButton = detail.querySelector(".detail-arrow-prev");
   const nextButton = detail.querySelector(".detail-arrow-next");
   let activeIndex = 0;
+  let activeMediaIndex = 0;
   let lastFocusedElement = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
 
   const renderDots = () => {
     dots.replaceChildren();
@@ -51,16 +54,83 @@ export function initWorkDetailView() {
     });
   };
 
+  const getCardAssets = (card) => {
+    try {
+      const assets = JSON.parse(card.dataset.detailAssets || "[]");
+      return Array.isArray(assets) ? assets.filter(Boolean) : [];
+    } catch {
+      return [];
+    }
+  };
+
+  const getAssetUrl = (card, asset) => {
+    const slug = card.dataset.productSlug;
+    const routeDepth = window.location.pathname.split("/").filter(Boolean).length;
+    const prefix = routeDepth > 0 ? ".." : ".";
+
+    if (!slug || !asset) {
+      return "";
+    }
+
+    return `${prefix}/products/${slug}/${asset}`;
+  };
+
+  const scrollToMedia = (index) => {
+    const gallery = stage.querySelector(".detail-gallery");
+
+    if (!gallery?.children.length) {
+      return;
+    }
+
+    activeMediaIndex = (index + gallery.children.length) % gallery.children.length;
+    gallery.children[activeMediaIndex]?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "nearest",
+    });
+  };
+
+  const moveMedia = (direction) => {
+    scrollToMedia(activeMediaIndex + direction);
+  };
+
   const render = () => {
     const card = cards[activeIndex];
-    const visual = card.querySelector(".work-visual");
-    const clonedVisual = visual.cloneNode(true);
+    const visualClass = card.dataset.detailVisualClass || "";
+    const galleryAssets = getCardAssets(card);
+    const fallbackVisual = card.querySelector(".work-visual");
+    const gallery = document.createElement("div");
 
-    clonedVisual.removeAttribute("href");
-    clonedVisual.removeAttribute("aria-label");
-    clonedVisual.setAttribute("aria-hidden", "true");
-    clonedVisual.classList.add("detail-visual");
-    stage.replaceChildren(clonedVisual);
+    gallery.className = "detail-gallery";
+    activeMediaIndex = 0;
+
+    galleryAssets.forEach((asset, index) => {
+      const slide = document.createElement("figure");
+      const visual = document.createElement("div");
+      const img = document.createElement("img");
+
+      slide.className = "detail-slide";
+      slide.setAttribute("aria-hidden", index === 0 ? "false" : "true");
+      visual.className = `detail-visual work-visual ${visualClass}`.trim();
+      img.src = getAssetUrl(card, asset);
+      img.alt = "";
+      img.loading = index === 0 ? "eager" : "lazy";
+      visual.append(img);
+      slide.append(visual);
+      gallery.append(slide);
+    });
+
+    if (!gallery.children.length && fallbackVisual) {
+      const clonedVisual = fallbackVisual.cloneNode(true);
+
+      clonedVisual.removeAttribute("href");
+      clonedVisual.removeAttribute("aria-label");
+      clonedVisual.setAttribute("aria-hidden", "true");
+      clonedVisual.classList.add("detail-visual");
+      gallery.append(clonedVisual);
+    }
+
+    stage.replaceChildren(gallery);
     code.textContent = card.querySelector(".work-code")?.textContent?.trim() || "";
     title.textContent = card.querySelector("h2")?.textContent?.trim() || "";
     renderDots();
@@ -101,6 +171,33 @@ export function initWorkDetailView() {
     });
   };
 
+  const handleTouchStart = (event) => {
+    const touch = event.changedTouches[0];
+
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  };
+
+  const handleTouchEnd = (event) => {
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+    const swipeThreshold = 42;
+
+    if (Math.max(absX, absY) < swipeThreshold) {
+      return;
+    }
+
+    if (absX > absY) {
+      move(deltaX > 0 ? -1 : 1);
+      return;
+    }
+
+    moveMedia(deltaY > 0 ? -1 : 1);
+  };
+
   cards.forEach((card, index) => {
     const visual = card.querySelector(".work-visual");
 
@@ -113,6 +210,13 @@ export function initWorkDetailView() {
   backButton.addEventListener("click", close);
   prevButton.addEventListener("click", () => move(-1));
   nextButton.addEventListener("click", () => move(1));
+  detail.addEventListener("click", (event) => {
+    if (event.target === detail || event.target === stage) {
+      close();
+    }
+  });
+  detail.addEventListener("touchstart", handleTouchStart, { passive: true });
+  detail.addEventListener("touchend", handleTouchEnd, { passive: true });
 
   document.addEventListener("keydown", (event) => {
     if (detail.hidden) {

@@ -10,6 +10,7 @@ const publicDir = path.join(root, "public");
 const productsDir = path.join(root, "src/products");
 const staticDir = path.join(root, "src/static");
 const productPlaceholder = "<!-- Product cards are generated from src/products/*/product.json during npm run build. -->";
+const imageExtensions = new Set([".avif", ".gif", ".jpeg", ".jpg", ".png", ".svg", ".webp"]);
 
 await rm(distDir, { force: true, recursive: true });
 await mkdir(distDir, { recursive: true });
@@ -89,8 +90,16 @@ async function readProducts(from) {
 
     try {
       const product = JSON.parse(await readFile(productFile, "utf8"));
+      const assets = await readProductAssets(path.join(productDir, "assets"));
+      const visualAsset = product.visual?.asset;
+
       products.push({
         ...product,
+        visual: {
+          ...(product.visual || {}),
+          asset: visualAsset || assets[0],
+        },
+        detailAssets: createDetailAssets(visualAsset || assets[0], assets),
         slug,
         sourceDir: productDir,
       });
@@ -105,6 +114,46 @@ async function readProducts(from) {
     const orderDelta = Number(a.order || 0) - Number(b.order || 0);
     return orderDelta || String(a.code).localeCompare(String(b.code));
   });
+}
+
+async function readProductAssets(from, relativeFrom = "") {
+  let entries = [];
+
+  try {
+    entries = await readdir(from, { withFileTypes: true });
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      return [];
+    }
+
+    throw error;
+  }
+
+  const files = [];
+
+  for (const entry of entries) {
+    if (entry.name.startsWith(".")) {
+      continue;
+    }
+
+    if (entry.isDirectory()) {
+      files.push(...await readProductAssets(path.join(from, entry.name), path.join(relativeFrom, entry.name)));
+      continue;
+    }
+
+    if (entry.isFile() && imageExtensions.has(path.extname(entry.name).toLowerCase())) {
+      files.push(path.join("assets", relativeFrom, entry.name).replaceAll(path.sep, "/"));
+    }
+  }
+
+  return files
+    .sort((a, b) => a.localeCompare(b));
+}
+
+function createDetailAssets(primaryAsset, assets) {
+  return [primaryAsset, ...assets]
+    .filter(Boolean)
+    .filter((asset, index, list) => list.indexOf(asset) === index);
 }
 
 async function copyProductAssets(products, to) {
@@ -134,7 +183,7 @@ function renderProductCard(product, assetPrefix) {
     ? `<img src="${assetPrefix}/products/${escapeAttribute(product.slug)}/${escapeAttribute(visual.asset)}" alt="" loading="eager" />`
     : "<span></span>";
 
-  return `<article class="work-card"${anchor}>
+  return `<article class="work-card"${anchor} data-product-slug="${escapeAttribute(product.slug)}" data-detail-assets="${escapeAttribute(JSON.stringify(product.detailAssets || []))}" data-detail-visual-class="${escapeAttribute(visualClass || "")}">
           <a class="work-visual ${escapeAttribute(visualClass)}" href="mailto:hello@premium-producer.ru" aria-label="Project ${escapeAttribute(product.code)}">
             ${visualBody}
           </a>
