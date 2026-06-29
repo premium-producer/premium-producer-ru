@@ -6,10 +6,33 @@ document.addEventListener("DOMContentLoaded", () => {
     initFleurCursor();
   }
 
-  if (finePointer && !reduceMotion && window.innerWidth >= 1025) {
+  initWideProjectCards();
+
+  if (!reduceMotion) {
     initLenisScroll();
   }
 });
+
+function initWideProjectCards() {
+  const syncImage = (image) => {
+    const card = image.closest(".work-card");
+
+    if (!card) {
+      return;
+    }
+
+    card.classList.toggle("work-card-wide", image.naturalWidth > image.naturalHeight);
+  };
+
+  document.querySelectorAll(".work-visual img").forEach((image) => {
+    if (image.complete) {
+      syncImage(image);
+      return;
+    }
+
+    image.addEventListener("load", () => syncImage(image), { once: true });
+  });
+}
 
 function initFleurCursor() {
   const cursor = document.createElement("div");
@@ -118,10 +141,11 @@ function initLenisScroll() {
     autoRaf: true,
     autoResize: true,
     smoothWheel: true,
-    syncTouch: false,
+    syncTouch: true,
     lerp: 0.08,
     wheelMultiplier: 0.9375,
-    touchMultiplier: 1,
+    touchMultiplier: 1.1,
+    touchInertiaMultiplier: 24,
     anchors: {
       offset: -60,
     },

@@ -64,3 +64,4 @@
 - Smoothed the desktop cursor link zoom via CSS `@property --cursor-scale` and reduced hover scale from `1.75` to `1.4`.
 - Added explicit crawl/indexing files and metadata for search engines: root `robots.txt`, root `sitemap.xml`, `meta robots` with snippets allowed, stronger title/description, social metadata, and basic `WebSite` JSON-LD.
 - Replaced the first work visual with the `vk_finopolis.png` project reference image copied into `public/project/`.
+- Added visible product cell outlines, automatic two-column cards for project images wider than square, and enabled Lenis touch scrolling outside reduced-motion mode.
