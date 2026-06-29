@@ -15,7 +15,6 @@
   --header-bg: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.94) 72%, rgba(255, 255, 255, 0));
   --active-ink: var(--ink);
   --cursor-color: #020202;
-  --cursor-shadow: none;
   --shine-line: rgba(255, 255, 255, 0.42);
   --accent-shadow: #1b1b1b;
   --deep-shadow: #0f0f0f;
@@ -41,8 +40,7 @@
     linear-gradient(145deg, rgba(91, 16, 35, 0.92), rgba(36, 6, 14, 0.98) 48%, rgba(19, 3, 7, 0.98));
   --header-bg: linear-gradient(180deg, var(--bg-deep) 0%, rgba(36, 6, 14, 0.96) 72%, rgba(36, 6, 14, 0));
   --active-ink: var(--gold-light);
-  --cursor-color: var(--ink);
-  --cursor-shadow: drop-shadow(0 0 5px rgba(255, 230, 163, 0.55));
+  --cursor-color: #ffffff;
   --shine-line: rgba(255, 230, 163, 0.46);
   --accent-shadow: #7a1730;
   --deep-shadow: #170308;
@@ -53,7 +51,13 @@
   color-scheme: light;
 }
 
-@property --cursor-scale {
+@property --cursor-speed-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --cursor-hover-scale {
   syntax: "<number>";
   inherits: false;
   initial-value: 1;
@@ -111,24 +115,28 @@ button {
 
   .fleur-cursor {
     --cursor-rotation: 0deg;
-    --cursor-scale: 1;
-    width: 21px;
-    height: 21px;
+    --cursor-speed-scale: 1;
+    --cursor-hover-scale: 1;
+    width: 19px;
+    height: 19px;
     pointer-events: none;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 99999999;
     background: var(--cursor-color);
-    filter: var(--cursor-shadow);
+    mix-blend-mode: difference;
     mask: url("./public/fleur-cursor.svg?v=gold-20260629") center / contain no-repeat;
     -webkit-mask: url("./public/fleur-cursor.svg?v=gold-20260629") center / contain no-repeat;
     opacity: 0;
-    transform: translate(-50%, -50%) rotate(var(--cursor-rotation)) scale(var(--cursor-scale));
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--cursor-rotation))
+      scale(calc(var(--cursor-speed-scale) * var(--cursor-hover-scale)));
     transition:
       opacity 180ms ease,
-      --cursor-scale 180ms ease;
-    will-change: left, top, transform, opacity;
+      --cursor-hover-scale 180ms ease;
+    will-change: left, top, transform, opacity, background;
   }
 
   .fleur-cursor.is-visible {
@@ -136,11 +144,11 @@ button {
   }
 
   .fleur-cursor.is-hovering {
-    --cursor-scale: 1.4;
+    --cursor-hover-scale: 1.4;
   }
 
   .fleur-cursor.is-pressed {
-    --cursor-scale: 1.15;
+    --cursor-hover-scale: 1.15;
   }
 }
 

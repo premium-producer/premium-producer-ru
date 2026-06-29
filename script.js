@@ -186,7 +186,10 @@ function initFleurCursor() {
   let targetY = currentY;
   let currentRotation = 0;
   let targetRotation = 0;
+  let currentSpeedScale = 1;
+  let targetSpeedScale = 1;
   let lastPointerX = currentX;
+  let lastPointerY = currentY;
   let lastPointerTime = 0;
   let hovering = false;
   let pressed = false;
@@ -212,28 +215,37 @@ function initFleurCursor() {
     currentX += (targetX - currentX) / 4;
     currentY += (targetY - currentY) / 4;
     targetRotation *= 0.9;
+    targetSpeedScale += (1 - targetSpeedScale) * 0.12;
 
     if (Math.abs(targetRotation) < 0.05) {
       targetRotation = 0;
     }
 
     currentRotation = rotateToward(currentRotation, targetRotation);
+    currentSpeedScale += (targetSpeedScale - currentSpeedScale) * 0.22;
     cursor.style.left = `${currentX}px`;
     cursor.style.top = `${currentY}px`;
     cursor.style.setProperty("--cursor-rotation", `${currentRotation}deg`);
+    cursor.style.setProperty("--cursor-speed-scale", currentSpeedScale.toFixed(3));
     window.requestAnimationFrame(tick);
   };
 
   document.addEventListener("mousemove", (event) => {
     const time = event.timeStamp || performance.now();
     const deltaTime = lastPointerTime ? Math.max(16, time - lastPointerTime) : 16;
-    const deltaX = event.clientX - lastPointerX;
+    const deltaX = event.movementX || event.clientX - lastPointerX;
+    const deltaY = event.movementY || event.clientY - lastPointerY;
     const velocityX = deltaX / deltaTime;
+    const velocity = Math.hypot(deltaX, deltaY) / deltaTime;
+    const distance = Math.hypot(deltaX, deltaY);
 
     targetX = event.clientX;
     targetY = event.clientY;
     targetRotation = clamp(velocityX * 30, -45, 45);
+    targetSpeedScale = 1 + clamp(Math.max(velocity * 0.28, distance / 1200), 0, 0.1);
+    currentSpeedScale = Math.max(currentSpeedScale, targetSpeedScale);
     lastPointerX = event.clientX;
+    lastPointerY = event.clientY;
     lastPointerTime = time;
     cursor.classList.add("is-visible");
     hovering = isInteractive(event.target);

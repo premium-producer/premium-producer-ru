@@ -72,3 +72,4 @@
 - Verified `/`, `/black/`, and `/gold/` locally through a temporary HTTP server; assets loaded and browser console had no errors.
 - Added a Yeezy-inspired fullscreen work detail view opened from each work visual, with centered artwork, back/previous/next controls, dots, work code, `$60`, and a plus mail link.
 - Verified the detail view locally on desktop and mobile-width viewports; centered positioning, route compatibility, no horizontal overflow, and no console errors.
+- Restored the desktop cursor inversion effect, reduced the base cursor from `21px` to `19px`, and added movement-speed scaling up to +10% on top of the existing larger hover scale for links and buttons.
