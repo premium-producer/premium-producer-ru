@@ -1,6 +1,6 @@
-import { initFleurCursor } from "./features/fleur-cursor.js?v=gallery-wheel-cooldown-20260629";
-import { initLenisScroll } from "./features/smooth-scroll.js?v=gallery-wheel-cooldown-20260629";
-import { initWorkDetailView } from "./features/work-detail.js?v=gallery-wheel-cooldown-20260629";
+import { initFleurCursor } from "./features/fleur-cursor.js?v=gallery-wheel-threshold-20260629";
+import { initLenisScroll } from "./features/smooth-scroll.js?v=gallery-wheel-threshold-20260629";
+import { initWorkDetailView } from "./features/work-detail.js?v=gallery-wheel-threshold-20260629";
 
 document.addEventListener("DOMContentLoaded", () => {
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;

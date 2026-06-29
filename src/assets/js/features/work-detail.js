@@ -277,7 +277,7 @@ export function initWorkDetailView() {
     const realCount = Number(gallery?.dataset.realCount || 0);
     const absX = Math.abs(event.deltaX);
     const absY = Math.abs(event.deltaY);
-    const wheelThreshold = 28;
+    const wheelThreshold = 56;
     const isHorizontalWheel = absX > absY;
 
     if (!gallery || Math.max(absX, absY) < wheelThreshold) {
