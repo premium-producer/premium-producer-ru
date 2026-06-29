@@ -219,10 +219,7 @@ export function initWorkDetailView() {
 
     if (absX > absY) {
       move(deltaX > 0 ? -1 : 1);
-      return;
     }
-
-    moveMedia(deltaY > 0 ? -1 : 1);
   };
 
   const handleTouchStart = (event) => {
@@ -246,10 +243,7 @@ export function initWorkDetailView() {
 
     if (absX > absY) {
       move(deltaX > 0 ? -1 : 1);
-      return;
     }
-
-    moveMedia(deltaY > 0 ? -1 : 1);
   };
 
   const handleWheel = (event) => {

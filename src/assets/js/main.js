@@ -1,6 +1,6 @@
-import { initFleurCursor } from "./features/fleur-cursor.js";
-import { initLenisScroll } from "./features/smooth-scroll.js";
-import { initWorkDetailView } from "./features/work-detail.js";
+import { initFleurCursor } from "./features/fleur-cursor.js?v=gallery-scroll-20260629";
+import { initLenisScroll } from "./features/smooth-scroll.js?v=gallery-scroll-20260629";
+import { initWorkDetailView } from "./features/work-detail.js?v=gallery-scroll-20260629";
 
 document.addEventListener("DOMContentLoaded", () => {
   const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;

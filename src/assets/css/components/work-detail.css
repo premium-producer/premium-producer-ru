@@ -75,7 +75,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  touch-action: none;
+  touch-action: pan-y;
 }
 
 .detail-gallery {
@@ -89,6 +89,7 @@
   grid-auto-rows: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
@@ -105,6 +106,7 @@
   place-items: center;
   margin: 0;
   scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .detail-media-arrow {
