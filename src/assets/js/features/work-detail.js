@@ -54,7 +54,9 @@ export function initWorkDetailView() {
   let swipeStartY = 0;
   let swipePointerId = null;
   let wheelLocked = false;
-  let loopCorrectionTimer = null;
+  let mediaAnimating = false;
+  let activeMediaAssets = [];
+  let activeVisualClass = "";
 
   const renderDots = () => {
     dots.replaceChildren();
@@ -90,76 +92,6 @@ export function initWorkDetailView() {
 
   const getNormalizedIndex = (index, total) => (index + total) % total;
 
-  const jumpToGalleryIndex = (gallery, index) => {
-    gallery.scrollTo({
-      behavior: "auto",
-      top: index * gallery.clientHeight,
-    });
-  };
-
-  const scheduleLoopCorrection = (gallery, targetIndex, delay = 120) => {
-    window.clearTimeout(loopCorrectionTimer);
-    loopCorrectionTimer = window.setTimeout(() => {
-      jumpToGalleryIndex(gallery, targetIndex);
-    }, delay);
-  };
-
-  const syncActiveMediaIndex = (gallery) => {
-    const realCount = Number(gallery.dataset.realCount || gallery.children.length);
-    const rawIndex = Math.round(gallery.scrollTop / gallery.clientHeight);
-
-    if (realCount < 2) {
-      activeMediaIndex = rawIndex;
-      return;
-    }
-
-    if (rawIndex === 0) {
-      activeMediaIndex = realCount - 1;
-      scheduleLoopCorrection(gallery, realCount);
-      return;
-    }
-
-    if (rawIndex === realCount + 1) {
-      activeMediaIndex = 0;
-      scheduleLoopCorrection(gallery, 1);
-      return;
-    }
-
-    activeMediaIndex = rawIndex - 1;
-  };
-
-  const scrollToMedia = (index) => {
-    const gallery = galleryMount.querySelector(".detail-gallery");
-
-    if (!gallery?.children.length) {
-      return;
-    }
-
-    const realCount = Number(gallery.dataset.realCount || gallery.children.length);
-
-    if (realCount < 2) {
-      activeMediaIndex = 0;
-      return;
-    }
-
-    const normalizedIndex = getNormalizedIndex(index, realCount);
-    const targetIndex = index < 0
-      ? 0
-      : index >= realCount
-        ? realCount + 1
-        : normalizedIndex + 1;
-
-    activeMediaIndex = normalizedIndex;
-    gallery.scrollTo({
-      behavior: "smooth",
-      top: targetIndex * gallery.clientHeight,
-    });
-
-    if (targetIndex === 0 || targetIndex === realCount + 1) {
-      scheduleLoopCorrection(gallery, normalizedIndex + 1, 380);
-    }
-  };
-
   const updateMediaControls = () => {
     const gallery = galleryMount.querySelector(".detail-gallery");
     const hasMultipleMedia = Number(gallery?.dataset.realCount || gallery?.children.length || 0) > 1;
@@ -168,8 +100,66 @@ export function initWorkDetailView() {
     mediaNextButton.hidden = !hasMultipleMedia;
   };
 
+  const createMediaSlide = (card, asset, index) => {
+    const slide = document.createElement("figure");
+    const visual = document.createElement("div");
+    const img = document.createElement("img");
+
+    slide.className = "detail-slide";
+    slide.setAttribute("aria-hidden", "false");
+    visual.className = `detail-visual work-visual ${activeVisualClass}`.trim();
+    img.src = getAssetUrl(card, asset);
+    img.alt = "";
+    img.loading = index === 0 ? "eager" : "lazy";
+    visual.append(img);
+    slide.append(visual);
+    return slide;
+  };
+
+  const renderMediaFrame = () => {
+    const card = cards[activeIndex];
+    const gallery = document.createElement("div");
+
+    gallery.className = "detail-gallery";
+    gallery.dataset.realCount = String(activeMediaAssets.length);
+
+    if (activeMediaAssets.length) {
+      gallery.append(createMediaSlide(card, activeMediaAssets[activeMediaIndex], activeMediaIndex));
+    }
+
+    galleryMount.replaceChildren(gallery);
+    updateMediaControls();
+  };
+
   const moveMedia = (direction) => {
-    scrollToMedia(activeMediaIndex + direction);
+    const gallery = galleryMount.querySelector(".detail-gallery");
+    const total = activeMediaAssets.length;
+
+    if (!gallery || total < 2 || mediaAnimating) {
+      return;
+    }
+
+    const card = cards[activeIndex];
+    const currentSlide = gallery.querySelector(".detail-slide");
+    const targetIndex = getNormalizedIndex(activeMediaIndex + direction, total);
+    const nextSlide = createMediaSlide(card, activeMediaAssets[targetIndex], targetIndex);
+    const travel = direction > 0 ? -100 : 100;
+
+    mediaAnimating = true;
+    nextSlide.classList.add("detail-slide-incoming");
+    nextSlide.style.transform = `translateY(${-travel}%)`;
+    gallery.append(nextSlide);
+
+    window.requestAnimationFrame(() => {
+      currentSlide.style.transform = `translateY(${travel}%)`;
+      nextSlide.style.transform = "translateY(0)";
+    });
+
+    window.setTimeout(() => {
+      activeMediaIndex = targetIndex;
+      mediaAnimating = false;
+      renderMediaFrame();
+    }, 260);
   };
 
   const render = () => {
@@ -177,62 +167,28 @@ export function initWorkDetailView() {
     const visualClass = card.dataset.detailVisualClass || "";
     const galleryAssets = getCardAssets(card);
     const fallbackVisual = card.querySelector(".work-visual");
-    const gallery = document.createElement("div");
 
-    gallery.className = "detail-gallery";
-    gallery.dataset.realCount = String(galleryAssets.length || (fallbackVisual ? 1 : 0));
+    activeVisualClass = visualClass;
+    activeMediaAssets = galleryAssets;
     activeMediaIndex = 0;
-    gallery.addEventListener("scroll", () => {
-      syncActiveMediaIndex(gallery);
-    }, { passive: true });
 
-    const createSlide = (asset, index, isClone = false) => {
-      const slide = document.createElement("figure");
-      const visual = document.createElement("div");
-      const img = document.createElement("img");
-
-      slide.className = isClone ? "detail-slide detail-slide-clone" : "detail-slide";
-      slide.setAttribute("aria-hidden", !isClone && index === 0 ? "false" : "true");
-      visual.className = `detail-visual work-visual ${visualClass}`.trim();
-      img.src = getAssetUrl(card, asset);
-      img.alt = "";
-      img.loading = index === 0 && !isClone ? "eager" : "lazy";
-      visual.append(img);
-      slide.append(visual);
-      return slide;
-    };
-
-    if (galleryAssets.length > 1) {
-      gallery.append(createSlide(galleryAssets[galleryAssets.length - 1], galleryAssets.length - 1, true));
-    }
-
-    galleryAssets.forEach((asset, index) => {
-      const slide = createSlide(asset, index);
-
-      gallery.append(slide);
-    });
-
-    if (galleryAssets.length > 1) {
-      gallery.append(createSlide(galleryAssets[0], 0, true));
-    }
-
-    if (!gallery.children.length && fallbackVisual) {
+    if (activeMediaAssets.length) {
+      renderMediaFrame();
+    } else if (fallbackVisual) {
+      const gallery = document.createElement("div");
       const clonedVisual = fallbackVisual.cloneNode(true);
 
+      gallery.className = "detail-gallery";
+      gallery.dataset.realCount = "1";
       clonedVisual.removeAttribute("href");
       clonedVisual.removeAttribute("aria-label");
       clonedVisual.setAttribute("aria-hidden", "true");
       clonedVisual.classList.add("detail-visual");
       gallery.append(clonedVisual);
+      galleryMount.replaceChildren(gallery);
+      updateMediaControls();
     }
 
-    galleryMount.replaceChildren(gallery);
-    window.requestAnimationFrame(() => {
-      if (gallery.dataset.realCount > 1) {
-        jumpToGalleryIndex(gallery, 1);
-      }
-    });
-    updateMediaControls();
     code.textContent = card.querySelector(".work-code")?.textContent?.trim() || "";
     title.textContent = card.querySelector("h2")?.textContent?.trim() || "";
     renderDots();
@@ -298,7 +254,10 @@ export function initWorkDetailView() {
 
     if (absX > absY) {
       move(deltaX > 0 ? -1 : 1);
+      return;
     }
+
+    moveMedia(deltaY > 0 ? -1 : 1);
   };
 
   const handleTouchStart = (event) => {
@@ -322,13 +281,17 @@ export function initWorkDetailView() {
 
     if (absX > absY) {
       move(deltaX > 0 ? -1 : 1);
+      return;
     }
+
+    moveMedia(deltaY > 0 ? -1 : 1);
   };
 
   const handleWheel = (event) => {
     const gallery = galleryMount.querySelector(".detail-gallery");
+    const realCount = Number(gallery?.dataset.realCount || 0);
 
-    if (!gallery || gallery.children.length < 2) {
+    if (!gallery || realCount < 2) {
       return;
     }
 
