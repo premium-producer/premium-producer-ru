@@ -14,7 +14,7 @@ Build a personal website for the domain `премиум-продюсер.рф`: 
 - Contact email: `hello@premium-producer.ru`.
 - Font: Google Fonts Outfit.
 - Current hosting: GitHub Pages from `main` branch, repository root.
-- Current frontend: static `index.html`, `styles.css`, `script.js`.
+- Current frontend: static HTML routes with modular assets under `assets/css/` and `assets/js/`.
 - Current smooth-scroll trial: Lenis `1.3.25` via jsDelivr.
 
 ## Direction

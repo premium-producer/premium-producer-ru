@@ -1,0 +1,56 @@
+@property --cursor-speed-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --cursor-hover-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html,
+  html *,
+  body,
+  body * {
+    cursor: none !important;
+  }
+
+  .fleur-cursor {
+    --cursor-rotation: 0deg;
+    --cursor-speed-scale: 1;
+    --cursor-hover-scale: 1;
+    width: 19px;
+    height: 19px;
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999999;
+    background: url("../../public/fleur-cursor.svg?v=architecture-20260629") center / contain no-repeat;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--cursor-rotation))
+      scale(calc(var(--cursor-speed-scale) * var(--cursor-hover-scale)));
+    transition:
+      opacity 180ms ease,
+      --cursor-hover-scale 180ms ease;
+    will-change: left, top, transform, opacity;
+  }
+
+  .fleur-cursor.is-visible {
+    opacity: 1;
+  }
+
+  .fleur-cursor.is-hovering {
+    --cursor-hover-scale: 1.4;
+  }
+
+  .fleur-cursor.is-pressed {
+    --cursor-hover-scale: 1.15;
+  }
+}

@@ -1,0 +1,50 @@
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-deep: #ffffff;
+  --ink: #0a0a0a;
+  --soft: #d6d6d6;
+  --muted: #777777;
+  --tile: #f3f3f3;
+  --wine: #2c2c2c;
+  --wine-dark: #111111;
+  --gold: #bdbdbd;
+  --gold-light: #eeeeee;
+  --champagne: #f1f1f1;
+  --body-bg: var(--bg);
+  --header-bg: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.94) 72%, rgba(255, 255, 255, 0));
+  --active-ink: var(--ink);
+  --shine-line: rgba(255, 255, 255, 0.42);
+  --accent-shadow: #1b1b1b;
+  --deep-shadow: #0f0f0f;
+  --design-shadow: #d5d5d5;
+  --fleur-cursor: url("../../public/fleur-cursor.svg?v=architecture-20260629") 10 10;
+}
+
+.theme-gold {
+  color-scheme: dark;
+  --bg: #24060e;
+  --bg-deep: #130307;
+  --ink: #f2d98b;
+  --soft: #9c7a44;
+  --muted: #c7a765;
+  --tile: #3a0b18;
+  --wine: #5a1023;
+  --wine-dark: #2b0711;
+  --gold: #d9ad46;
+  --gold-light: #ffe6a3;
+  --champagne: #f7edcd;
+  --body-bg:
+    linear-gradient(90deg, rgba(255, 230, 163, 0.035) 0 1px, transparent 1px 5px),
+    linear-gradient(145deg, rgba(91, 16, 35, 0.92), rgba(36, 6, 14, 0.98) 48%, rgba(19, 3, 7, 0.98));
+  --header-bg: linear-gradient(180deg, var(--bg-deep) 0%, rgba(36, 6, 14, 0.96) 72%, rgba(36, 6, 14, 0));
+  --active-ink: var(--gold-light);
+  --shine-line: rgba(255, 230, 163, 0.46);
+  --accent-shadow: #7a1730;
+  --deep-shadow: #170308;
+  --design-shadow: #7a1730;
+}
+
+.theme-black {
+  color-scheme: light;
+}

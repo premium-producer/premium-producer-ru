@@ -1,0 +1,179 @@
+.work-visual span,
+.work-visual::before,
+.work-visual::after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.visual-launch span {
+  width: 118px;
+  height: 158px;
+  border-radius: 48% 48% 9px 9px;
+  background: linear-gradient(160deg, var(--wine-dark) 12%, var(--wine) 46%, var(--gold) 78%);
+  clip-path: polygon(16% 0, 88% 7%, 100% 76%, 48% 100%, 0 75%);
+}
+
+.visual-launch::before {
+  width: 132px;
+  height: 22px;
+  top: 34px;
+  border-radius: 999px;
+  background: var(--gold-light);
+  transform: rotate(-4deg);
+}
+
+.visual-stage span {
+  width: 168px;
+  height: 118px;
+  border-radius: 50% 50% 8px 8px;
+  background: linear-gradient(180deg, var(--wine-dark) 0 46%, var(--gold) 47% 100%);
+  clip-path: polygon(4% 18%, 100% 0, 88% 100%, 22% 86%);
+}
+
+.visual-stage::after {
+  width: 184px;
+  height: 6px;
+  bottom: 44px;
+  border-radius: 999px;
+  background: var(--gold-light);
+}
+
+.visual-content span {
+  width: 142px;
+  height: 176px;
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent 0 22%, var(--shine-line) 22% 25%, transparent 25% 100%),
+    linear-gradient(180deg, var(--wine-dark), var(--wine));
+  box-shadow: 22px 8px 0 var(--accent-shadow), -22px 18px 0 var(--deep-shadow);
+}
+
+.visual-script span {
+  width: 170px;
+  height: 126px;
+  border-radius: 6px;
+  background:
+    linear-gradient(var(--wine-dark) 0 0) 24px 28px / 112px 6px no-repeat,
+    linear-gradient(var(--wine-dark) 0 0) 24px 54px / 88px 6px no-repeat,
+    linear-gradient(var(--wine-dark) 0 0) 24px 80px / 122px 6px no-repeat,
+    var(--gold-light);
+  box-shadow: 14px 14px 0 var(--gold);
+}
+
+.visual-event span {
+  width: 178px;
+  height: 132px;
+  border-radius: 68px 68px 10px 10px;
+  background:
+    radial-gradient(circle at 50% 74%, var(--gold-light) 0 9px, transparent 10px),
+    linear-gradient(155deg, var(--wine-dark), var(--wine) 54%, var(--gold));
+  clip-path: polygon(12% 5%, 88% 0, 100% 100%, 0 92%);
+}
+
+.visual-media span {
+  width: 166px;
+  height: 138px;
+  border: 12px solid var(--gold);
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, transparent 45%, var(--wine-dark) 46% 52%, transparent 53%),
+    var(--champagne);
+}
+
+.visual-media::after {
+  width: 56px;
+  height: 42px;
+  right: 26px;
+  top: 42px;
+  background: var(--wine-dark);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.visual-brand span {
+  width: 136px;
+  height: 184px;
+  border-radius: 3px 3px 48px 48px;
+  background: linear-gradient(90deg, var(--wine-dark) 0 58%, var(--gold) 58% 100%);
+}
+
+.visual-brand::after {
+  width: 98px;
+  height: 18px;
+  bottom: 38px;
+  border-radius: 999px;
+  background: var(--gold-light);
+}
+
+.visual-campaign span {
+  width: 184px;
+  height: 116px;
+  border-radius: 999px 999px 16px 16px;
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  clip-path: polygon(8% 0, 100% 12%, 86% 100%, 0 76%);
+}
+
+.visual-campaign::before {
+  width: 124px;
+  height: 24px;
+  top: 66px;
+  border-radius: 999px;
+  background: var(--wine-dark);
+  transform: rotate(5deg);
+}
+
+.visual-artist span {
+  width: 156px;
+  height: 176px;
+  border-radius: 76px 76px 18px 18px;
+  background:
+    linear-gradient(var(--wine-dark) 0 0) center 84px / 88px 10px no-repeat,
+    linear-gradient(180deg, var(--gold-light), var(--gold));
+}
+
+.visual-artist::before {
+  width: 92px;
+  height: 54px;
+  top: 35px;
+  border-radius: 50% 50% 0 0;
+  background: var(--champagne);
+}
+
+.visual-design span {
+  width: 178px;
+  height: 118px;
+  border-radius: 4px;
+  background:
+    linear-gradient(90deg, var(--wine-dark) 0 10px, transparent 10px 100%),
+    linear-gradient(180deg, var(--gold-light), var(--gold));
+  box-shadow: 18px 18px 0 var(--champagne), -14px -12px 0 var(--design-shadow);
+}
+
+.visual-flow span {
+  width: 170px;
+  height: 142px;
+  background:
+    radial-gradient(circle at 18% 24%, var(--gold) 0 18px, transparent 19px),
+    radial-gradient(circle at 76% 24%, var(--gold-light) 0 18px, transparent 19px),
+    radial-gradient(circle at 50% 76%, var(--wine) 0 18px, transparent 19px),
+    linear-gradient(var(--gold) 0 0) 35px 34px / 95px 6px no-repeat,
+    linear-gradient(126deg, transparent 47%, var(--gold) 48% 52%, transparent 53%),
+    linear-gradient(54deg, transparent 47%, var(--gold) 48% 52%, transparent 53%);
+}
+
+.visual-premium span {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 44%, var(--gold-light) 0 22px, transparent 23px),
+    conic-gradient(from 28deg, var(--wine-dark), var(--gold), var(--wine), var(--gold-light), var(--wine-dark));
+}
+
+.visual-premium::after {
+  width: 116px;
+  height: 16px;
+  bottom: 38px;
+  border-radius: 999px;
+  background: var(--gold);
+}

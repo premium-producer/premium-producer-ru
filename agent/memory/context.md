@@ -19,7 +19,12 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - `index.html`
 - `black/index.html`
 - `gold/index.html`
-- `styles.css`
+- `assets/README.md`
+- `assets/css/main.css`
+- `assets/css/base/`
+- `assets/css/components/`
+- `assets/js/main.js`
+- `assets/js/features/`
 - `docs/deploy-github-pages.md`
 - `agent/README.md`
 - `agent/project-brief.md`
@@ -36,8 +41,8 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - Static website, no build step.
 - Main entry: `index.html`.
 - Theme route entries: `black/index.html` and `gold/index.html`.
-- Styling: `styles.css`.
-- Behavior: `script.js`.
+- Styling: `assets/css/main.css`, split into base layers and component styles.
+- Behavior: `assets/js/main.js`, split into feature modules.
 - Static assets: `public/`.
 - GitHub Pages publishes from branch `main`, folder `/root`.
 - Domain configured through root `CNAME`: `xn----htbbcmxbrdffgdmx6p.xn--p1ai`.
@@ -48,7 +53,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - Google Fonts: Outfit, weights `200`, `300`, `400`, `500`.
 - Lenis `1.3.25` from jsDelivr for a controlled desktop smooth-scroll trial.
 - Current Lenis desktop wheel speed uses `wheelMultiplier: 0.9375`, which is 25% faster than the earlier `0.75` trial.
-- Lenis runs only on desktop/fine pointer, with reduced-motion fallback and native scroll fallback if CDN fails.
+- Lenis runs outside reduced-motion mode, with native scroll fallback if CDN fails.
 - Custom fleur-de-lis cursor asset: `public/fleur-cursor.svg`, generated from user-provided reference SVG.
 - Reference materials live in `agent/referens/`, including Yeezy-like visual references and fleur-de-lis references.
 
@@ -63,10 +68,10 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - Clicking a work visual opens a Yeezy-inspired fullscreen detail view: the selected object is centered, side arrows switch works, the back control closes the view, and the plus link starts an email inquiry.
 - Vertical rhythm matters: distance from visual to label should feel balanced against distance from label to the next visual row.
 - Native Mac scrolling felt too plain, but the first custom `preventDefault` wheel implementation felt bad on Mac trackpad. Current trial uses Lenis instead.
-- Custom cursor should be a small heraldic fleur-de-lis. Current SVG size is `21x21`, about 1.5x smaller than the earlier `32x32`.
+- Custom cursor should be a small heraldic fleur-de-lis. Current rendered DOM cursor is `19x19`, about 10% smaller than the earlier `21x21` size.
 - Desktop cursor should react to mouse movement inertia rather than aim at work objects: horizontal pointer velocity sets a `-45deg..45deg` lean, then the cursor smoothly returns to center.
-- Cursor uses color inversion (`filter: invert(1)` with `mix-blend-mode: difference`) rather than staying visually static.
-- Cursor link hover zoom should be subtle and smooth; current hover scale is `1.4`, animated through CSS `@property --cursor-scale`.
+- Cursor uses a white SVG background with `mix-blend-mode: difference` for color inversion rather than staying visually static.
+- Cursor link hover zoom should be subtle and smooth; current hover scale is `1.4`, and movement speed can add up to another `10%`.
 - Mobile/touch devices should avoid custom cursor and avoid forced smooth-scroll behavior.
 
 ## Deployment And Domain

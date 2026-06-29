@@ -76,3 +76,4 @@
 - Fixed weak cursor visibility by replacing the CSS mask cursor with a white SVG background using `mix-blend-mode: difference`; verified locally that the cursor has no mask, uses the SVG background, and stays `19px`.
 - Removed automatic two-cell project cards; the catalog grid now uses four columns on desktop and every work item stays inside one grid cell.
 - Hid the browser scrollbar and removed the reserved scrollbar gutter while preserving normal page scrolling.
+- Refactored the frontend architecture away from root-level monolithic `styles.css` and `script.js`: CSS now loads through `assets/css/main.css` with base/component layers, JavaScript now loads through `assets/js/main.js` with feature modules for detail view, cursor, and smooth scroll, and the old monolith files were removed.

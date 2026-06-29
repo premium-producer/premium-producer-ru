@@ -1,0 +1,97 @@
+.work-page {
+  padding: 112px 0 54px;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  row-gap: 0;
+}
+
+.work-card {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: minmax(116px, 13vw) clamp(54px, 5vw, 86px);
+  align-items: center;
+  justify-items: center;
+  padding: 0 14px;
+}
+
+.work-code,
+.work-card h2 {
+  margin: 0;
+  font-size: clamp(16px, 1.18vw, 23px);
+  font-weight: 300;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.work-card h2 {
+  display: none;
+  color: var(--ink);
+  font-size: clamp(11px, 0.72vw, 14px);
+  font-weight: 300;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.work-card:hover h2,
+.work-card:focus-within h2 {
+  opacity: 1;
+}
+
+.work-visual {
+  width: min(72%, 220px);
+  height: min(64%, 210px);
+  min-height: 108px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  transform: scale(0.72);
+  transform-origin: center;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.work-visual:hover,
+.work-visual:focus-visible {
+  transform: translateY(-3px) scale(0.72);
+  filter: contrast(1.08);
+  outline: none;
+}
+
+.work-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.visual-project {
+  width: min(82%, 260px);
+  height: 100%;
+  overflow: hidden;
+  transform: none;
+}
+
+.visual-project img {
+  object-fit: contain;
+  object-position: center center;
+}
+
+.visual-project-single {
+  width: min(82%, 220px);
+  height: min(76%, 210px);
+}
+
+.visual-project-single img {
+  object-fit: contain;
+}
+
+.work-visual.visual-project:hover,
+.work-visual.visual-project:focus-visible {
+  transform: translateY(-3px);
+}
