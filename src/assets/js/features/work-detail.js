@@ -54,6 +54,7 @@ export function initWorkDetailView() {
   let swipeStartY = 0;
   let swipePointerId = null;
   let wheelLocked = false;
+  let wheelUnlockTimer = null;
   let activeMediaAssets = [];
   let activeVisualClass = "";
 
@@ -289,6 +290,11 @@ export function initWorkDetailView() {
 
     event.preventDefault();
 
+    window.clearTimeout(wheelUnlockTimer);
+    wheelUnlockTimer = window.setTimeout(() => {
+      wheelLocked = false;
+    }, 1400);
+
     if (wheelLocked) {
       return;
     }
@@ -301,9 +307,6 @@ export function initWorkDetailView() {
       moveMedia(event.deltaY > 0 ? 1 : -1);
     }
 
-    window.setTimeout(() => {
-      wheelLocked = false;
-    }, 320);
   };
 
   cards.forEach((card, index) => {
