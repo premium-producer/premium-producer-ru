@@ -32,3 +32,4 @@
 - Increase Lenis wheel speed by 25% from the first trial: `wheelMultiplier` changed from `0.75` to `0.9375`.
 - Make the desktop fleur-de-lis cursor rotate from mouse movement inertia, not from nearest-object aiming.
 - Clamp cursor rotation to `-45deg..45deg` so it only leans left or right, then smoothly returns to center.
+- Keep `/` as the gold visual version for now, and add static route folders `/black/` and `/gold/` for theme-specific variants on GitHub Pages.

@@ -17,6 +17,8 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - `CNAME`
 - `README.md`
 - `index.html`
+- `black/index.html`
+- `gold/index.html`
 - `styles.css`
 - `docs/deploy-github-pages.md`
 - `agent/README.md`
@@ -33,6 +35,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 
 - Static website, no build step.
 - Main entry: `index.html`.
+- Theme route entries: `black/index.html` and `gold/index.html`.
 - Styling: `styles.css`.
 - Behavior: `script.js`.
 - Static assets: `public/`.
@@ -52,6 +55,9 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 ## Current UX Decisions
 
 - Overall direction: thin, minimal, sparse, luxury/catalog feeling.
+- The root page currently uses the `theme-gold` route styling.
+- `/black/` provides the strict black-and-white minimal version.
+- `/gold/` provides the velvet burgundy-and-gold version.
 - Typography should be light/thin, not bold.
 - Work codes like `PR-01` sit below each visual object.
 - Vertical rhythm matters: distance from visual to label should feel balanced against distance from label to the next visual row.

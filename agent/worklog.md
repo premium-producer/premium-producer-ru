@@ -66,3 +66,7 @@
 - Replaced the first work visual with the `vk_finopolis.png` project reference image copied into `public/project/`.
 - Added visible product cell outlines, automatic two-column cards for project images wider than square, and enabled Lenis touch scrolling outside reduced-motion mode.
 - Replaced the second work visual with the `vktech_stand_icon` SVG as a single-cell project image, centered project images on both axes, and removed temporary cell outlines.
+- Recolored the site into a velvet burgundy-and-gold palette and fixed the fleur-de-lis cursor by making the SVG mask color theme-driven.
+- Added static GitHub Pages routes `/black/` and `/gold/`, with shared `styles.css` theme variables and footer links between the variants.
+- Updated `sitemap.xml` to include `/black/` and `/gold/`.
+- Verified `/`, `/black/`, and `/gold/` locally through a temporary HTTP server; assets loaded and browser console had no errors.
