@@ -54,7 +54,6 @@ export function initWorkDetailView() {
   let swipeStartY = 0;
   let swipePointerId = null;
   let wheelLocked = false;
-  let mediaAnimating = false;
   let activeMediaAssets = [];
   let activeVisualClass = "";
 
@@ -132,34 +131,18 @@ export function initWorkDetailView() {
   };
 
   const moveMedia = (direction) => {
-    const gallery = galleryMount.querySelector(".detail-gallery");
     const total = activeMediaAssets.length;
 
-    if (!gallery || total < 2 || mediaAnimating) {
+    if (total < 2) {
       return;
     }
 
-    const card = cards[activeIndex];
-    const currentSlide = gallery.querySelector(".detail-slide");
-    const targetIndex = getNormalizedIndex(activeMediaIndex + direction, total);
-    const nextSlide = createMediaSlide(card, activeMediaAssets[targetIndex], targetIndex);
-    const travel = direction > 0 ? -100 : 100;
-
-    mediaAnimating = true;
-    nextSlide.classList.add("detail-slide-incoming");
-    nextSlide.style.transform = `translateY(${-travel}%)`;
-    gallery.append(nextSlide);
-
+    activeMediaIndex = getNormalizedIndex(activeMediaIndex + direction, total);
+    detail.classList.remove("is-switching");
+    renderMediaFrame();
     window.requestAnimationFrame(() => {
-      currentSlide.style.transform = `translateY(${travel}%)`;
-      nextSlide.style.transform = "translateY(0)";
+      detail.classList.add("is-switching");
     });
-
-    window.setTimeout(() => {
-      activeMediaIndex = targetIndex;
-      mediaAnimating = false;
-      renderMediaFrame();
-    }, 260);
   };
 
   const render = () => {

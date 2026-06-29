@@ -97,8 +97,6 @@
   display: grid;
   place-items: center;
   margin: 0;
-  transition: transform 240ms ease;
-  will-change: transform;
 }
 
 .detail-media-arrow {
