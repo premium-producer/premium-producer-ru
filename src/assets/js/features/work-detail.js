@@ -274,19 +274,32 @@ export function initWorkDetailView() {
   const handleWheel = (event) => {
     const gallery = galleryMount.querySelector(".detail-gallery");
     const realCount = Number(gallery?.dataset.realCount || 0);
+    const absX = Math.abs(event.deltaX);
+    const absY = Math.abs(event.deltaY);
+    const wheelThreshold = 14;
+    const isHorizontalWheel = absX > absY;
 
-    if (!gallery || realCount < 2) {
+    if (!gallery || Math.max(absX, absY) < wheelThreshold) {
+      return;
+    }
+
+    if (!isHorizontalWheel && realCount < 2) {
       return;
     }
 
     event.preventDefault();
 
-    if (wheelLocked || Math.abs(event.deltaY) < 14) {
+    if (wheelLocked) {
       return;
     }
 
     wheelLocked = true;
-    moveMedia(event.deltaY > 0 ? 1 : -1);
+
+    if (isHorizontalWheel) {
+      move(event.deltaX > 0 ? 1 : -1);
+    } else {
+      moveMedia(event.deltaY > 0 ? 1 : -1);
+    }
 
     window.setTimeout(() => {
       wheelLocked = false;
