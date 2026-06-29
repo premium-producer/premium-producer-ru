@@ -293,7 +293,7 @@ export function initWorkDetailView() {
     window.clearTimeout(wheelUnlockTimer);
     wheelUnlockTimer = window.setTimeout(() => {
       wheelLocked = false;
-    }, 1400);
+    }, 240);
 
     if (wheelLocked) {
       return;
