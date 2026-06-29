@@ -18,7 +18,7 @@
   --accent-shadow: #1b1b1b;
   --deep-shadow: #0f0f0f;
   --design-shadow: #d5d5d5;
-  --fleur-cursor: url("../../public/fleur-cursor.svg?v=architecture-20260629") 10 10;
+  --fleur-cursor: url("../../../public/fleur-cursor.svg?v=architecture-20260629") 10 10;
 }
 
 .theme-gold {

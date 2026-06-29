@@ -29,7 +29,7 @@
     top: 0;
     left: 0;
     z-index: 99999999;
-    background: url("../../public/fleur-cursor.svg?v=architecture-20260629") center / contain no-repeat;
+    background: url("../../../public/fleur-cursor.svg?v=architecture-20260629") center / contain no-repeat;
     mix-blend-mode: difference;
     opacity: 0;
     transform:
