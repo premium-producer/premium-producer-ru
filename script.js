@@ -21,6 +21,11 @@ function initWideProjectCards() {
       return;
     }
 
+    if (image.dataset.gridSpan === "1") {
+      card.classList.remove("work-card-wide");
+      return;
+    }
+
     card.classList.toggle("work-card-wide", image.naturalWidth > image.naturalHeight);
   };
 

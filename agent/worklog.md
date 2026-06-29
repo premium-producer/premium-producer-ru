@@ -65,3 +65,4 @@
 - Added explicit crawl/indexing files and metadata for search engines: root `robots.txt`, root `sitemap.xml`, `meta robots` with snippets allowed, stronger title/description, social metadata, and basic `WebSite` JSON-LD.
 - Replaced the first work visual with the `vk_finopolis.png` project reference image copied into `public/project/`.
 - Added visible product cell outlines, automatic two-column cards for project images wider than square, and enabled Lenis touch scrolling outside reduced-motion mode.
+- Replaced the second work visual with the `vktech_stand_icon` SVG as a single-cell project image, centered project images on both axes, and removed temporary cell outlines.

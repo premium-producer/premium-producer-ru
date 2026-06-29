@@ -5,7 +5,6 @@
   --soft: #d6d6d6;
   --muted: #969696;
   --tile: #f3f3f3;
-  --cell-line: rgba(10, 10, 10, 0.14);
   --fleur-cursor: url("./public/fleur-cursor.svg") 10 10;
 }
 
@@ -191,8 +190,6 @@ a {
   align-items: center;
   justify-items: center;
   padding: 0 14px;
-  outline: 1px solid var(--cell-line);
-  outline-offset: -1px;
 }
 
 .work-card-wide {
@@ -260,7 +257,16 @@ a {
 
 .visual-project img {
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
+}
+
+.visual-project-single {
+  width: min(82%, 220px);
+  height: min(76%, 210px);
+}
+
+.visual-project-single img {
+  object-fit: contain;
 }
 
 .work-visual.visual-project:hover,
@@ -494,6 +500,11 @@ a {
   .visual-project {
     width: min(88%, 440px);
   }
+
+  .visual-project-single {
+    width: min(82%, 210px);
+    height: min(76%, 210px);
+  }
 }
 
 @media (max-width: 760px) {
@@ -558,6 +569,11 @@ a {
     width: min(88%, 360px);
     height: 100%;
     transform: none;
+  }
+
+  .visual-project-single {
+    width: min(82%, 170px);
+    height: 100%;
   }
 
   .work-visual:hover,
