@@ -53,6 +53,7 @@ export function initWorkDetailView() {
   let swipeStartX = 0;
   let swipeStartY = 0;
   let swipePointerId = null;
+  let wheelLocked = false;
 
   const renderDots = () => {
     dots.replaceChildren();
@@ -251,6 +252,27 @@ export function initWorkDetailView() {
     moveMedia(deltaY > 0 ? -1 : 1);
   };
 
+  const handleWheel = (event) => {
+    const gallery = galleryMount.querySelector(".detail-gallery");
+
+    if (!gallery || gallery.children.length < 2) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (wheelLocked || Math.abs(event.deltaY) < 14) {
+      return;
+    }
+
+    wheelLocked = true;
+    moveMedia(event.deltaY > 0 ? 1 : -1);
+
+    window.setTimeout(() => {
+      wheelLocked = false;
+    }, 320);
+  };
+
   cards.forEach((card, index) => {
     const visual = card.querySelector(".work-visual");
 
@@ -270,6 +292,7 @@ export function initWorkDetailView() {
   stage.addEventListener("pointercancel", () => {
     swipePointerId = null;
   });
+  galleryShell.addEventListener("wheel", handleWheel, { passive: false });
   detail.addEventListener("click", (event) => {
     if (event.target === detail || event.target === stage) {
       close();
