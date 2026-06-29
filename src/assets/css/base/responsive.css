@@ -115,6 +115,20 @@
     min-height: 220px;
   }
 
+  .detail-media-arrow {
+    width: 36px;
+    height: 28px;
+    font-size: 29px;
+  }
+
+  .detail-media-arrow-up {
+    top: 8px;
+  }
+
+  .detail-media-arrow-down {
+    bottom: 8px;
+  }
+
   .detail-visual.work-visual,
   .detail-visual.visual-project,
   .detail-visual.visual-project-single {

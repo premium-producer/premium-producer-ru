@@ -18,7 +18,11 @@ export function initWorkDetailView() {
       <span class="bag-icon"></span>
     </div>
     <button class="detail-arrow detail-arrow-prev" type="button" aria-label="Предыдущая работа">‹</button>
-    <div class="detail-stage" aria-live="polite"></div>
+    <div class="detail-stage" aria-live="polite">
+      <button class="detail-media-arrow detail-media-arrow-up" type="button" aria-label="Предыдущее фото">⌃</button>
+      <div class="detail-gallery-shell"></div>
+      <button class="detail-media-arrow detail-media-arrow-down" type="button" aria-label="Следующее фото">⌄</button>
+    </div>
     <button class="detail-arrow detail-arrow-next" type="button" aria-label="Следующая работа">›</button>
     <div class="detail-meta">
       <div class="detail-dots" aria-hidden="true"></div>
@@ -31,12 +35,15 @@ export function initWorkDetailView() {
   document.body.append(detail);
 
   const stage = detail.querySelector(".detail-stage");
+  const galleryShell = detail.querySelector(".detail-gallery-shell");
   const code = detail.querySelector(".detail-code");
   const title = detail.querySelector(".detail-title");
   const dots = detail.querySelector(".detail-dots");
   const backButton = detail.querySelector(".detail-back");
   const prevButton = detail.querySelector(".detail-arrow-prev");
   const nextButton = detail.querySelector(".detail-arrow-next");
+  const mediaPrevButton = detail.querySelector(".detail-media-arrow-up");
+  const mediaNextButton = detail.querySelector(".detail-media-arrow-down");
   let activeIndex = 0;
   let activeMediaIndex = 0;
   let lastFocusedElement = null;
@@ -76,7 +83,7 @@ export function initWorkDetailView() {
   };
 
   const scrollToMedia = (index) => {
-    const gallery = stage.querySelector(".detail-gallery");
+    const gallery = galleryShell.querySelector(".detail-gallery");
 
     if (!gallery?.children.length) {
       return;
@@ -88,6 +95,14 @@ export function initWorkDetailView() {
       block: "nearest",
       inline: "nearest",
     });
+  };
+
+  const updateMediaControls = () => {
+    const gallery = galleryShell.querySelector(".detail-gallery");
+    const hasMultipleMedia = (gallery?.children.length || 0) > 1;
+
+    mediaPrevButton.hidden = !hasMultipleMedia;
+    mediaNextButton.hidden = !hasMultipleMedia;
   };
 
   const moveMedia = (direction) => {
@@ -130,7 +145,8 @@ export function initWorkDetailView() {
       gallery.append(clonedVisual);
     }
 
-    stage.replaceChildren(gallery);
+    galleryShell.replaceChildren(gallery);
+    updateMediaControls();
     code.textContent = card.querySelector(".work-code")?.textContent?.trim() || "";
     title.textContent = card.querySelector("h2")?.textContent?.trim() || "";
     renderDots();
@@ -157,7 +173,7 @@ export function initWorkDetailView() {
     window.premiumProducerLenis?.start?.();
     window.setTimeout(() => {
       detail.hidden = true;
-      stage.replaceChildren();
+      galleryShell.replaceChildren();
       lastFocusedElement?.focus?.({ preventScroll: true });
     }, 180);
   };
@@ -210,6 +226,8 @@ export function initWorkDetailView() {
   backButton.addEventListener("click", close);
   prevButton.addEventListener("click", () => move(-1));
   nextButton.addEventListener("click", () => move(1));
+  mediaPrevButton.addEventListener("click", () => moveMedia(-1));
+  mediaNextButton.addEventListener("click", () => moveMedia(1));
   detail.addEventListener("click", (event) => {
     if (event.target === detail || event.target === stage) {
       close();
@@ -233,6 +251,14 @@ export function initWorkDetailView() {
 
     if (event.key === "ArrowRight") {
       move(1);
+    }
+
+    if (event.key === "ArrowUp") {
+      moveMedia(-1);
+    }
+
+    if (event.key === "ArrowDown") {
+      moveMedia(1);
     }
   });
 }
