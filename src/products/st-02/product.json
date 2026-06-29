@@ -1,0 +1,11 @@
+{
+  "order": 2,
+  "code": "ST-02",
+  "title": "Stage Direction",
+  "visual": {
+    "type": "image",
+    "className": "visual-project-single",
+    "asset": "assets/vktech-stand-icon.svg"
+  },
+  "captions": []
+}

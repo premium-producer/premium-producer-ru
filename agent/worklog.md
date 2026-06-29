@@ -78,3 +78,5 @@
 - Hid the browser scrollbar and removed the reserved scrollbar gutter while preserving normal page scrolling.
 - Refactored the frontend architecture away from root-level monolithic `styles.css` and `script.js`: CSS now loads through `assets/css/main.css` with base/component layers, JavaScript now loads through `assets/js/main.js` with feature modules for detail view, cursor, and smooth scroll, and the old monolith files were removed.
 - Moved route source files out of the repository root into `src/pages/`, moved frontend assets into `src/assets/`, moved deploy-only files into `src/static/`, and added a build script plus GitHub Pages Actions workflow that publishes the generated `dist/` artifact.
+- Reworked catalog data so cards are generated only from `src/products/<product>/product.json`; each product owns its local `assets/` folder and image replacements no longer require editing route HTML.
+- Removed products without image assets; only `PR-01`, `ST-02`, and `CN-03` currently render.

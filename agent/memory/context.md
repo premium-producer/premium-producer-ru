@@ -20,6 +20,9 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - `src/pages/index.html`
 - `src/pages/black/index.html`
 - `src/pages/gold/index.html`
+- `src/products/README.md`
+- `src/products/<product>/product.json`
+- `src/products/<product>/assets/`
 - `src/assets/README.md`
 - `src/assets/css/main.css`
 - `src/assets/css/base/`
@@ -43,9 +46,12 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 
 ## Current Architecture
 
-- Static website with a small build step that copies source files into `dist/`.
+- Static website with a small build step that renders product cards and copies source files into `dist/`.
 - Main route source: `src/pages/index.html`.
 - Theme route sources: `src/pages/black/index.html` and `src/pages/gold/index.html`.
+- Product source of truth: `src/products/<product>/product.json`.
+- Product-local image assets: `src/products/<product>/assets/`, deployed to `dist/products/<product>/assets/`.
+- Current visible products: `pr-01`, `st-02`, `cn-03`; products without image assets were removed.
 - Styling: `src/assets/css/main.css`, split into base layers and component styles.
 - Behavior: `src/assets/js/main.js`, split into feature modules.
 - Static assets: `public/`.
@@ -72,6 +78,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - Typography should be light/thin, not bold.
 - Work codes like `PR-01` sit below each visual object.
 - Clicking a work visual opens a Yeezy-inspired fullscreen detail view: the selected object is centered, side arrows switch works, the back control closes the view, and the plus link starts an email inquiry.
+- Product images should be changed in the owning `src/products/<product>/assets/` folder.
 - Vertical rhythm matters: distance from visual to label should feel balanced against distance from label to the next visual row.
 - Native Mac scrolling felt too plain, but the first custom `preventDefault` wheel implementation felt bad on Mac trackpad. Current trial uses Lenis instead.
 - Custom cursor should be a small heraldic fleur-de-lis. Current rendered DOM cursor is `19x19`, about 10% smaller than the earlier `21x21` size.

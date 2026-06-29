@@ -43,8 +43,10 @@ npm run build
 npm run preview
 ```
 
-The source pages live in `src/pages/`. The public routes `/`, `/black/`, and
-`/gold/` are generated into `dist/` during deployment.
+The source pages live in `src/pages/`. Product cards are generated from
+`src/products/<product>/product.json` and product-local images in
+`src/products/<product>/assets/`. The public routes `/`, `/black/`, and `/gold/`
+are generated into `dist/` during deployment.
 
 ## DNS Records
 

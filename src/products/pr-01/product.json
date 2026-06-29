@@ -1,0 +1,11 @@
+{
+  "order": 1,
+  "code": "PR-01",
+  "title": "Product Launch",
+  "anchor": "launches",
+  "visual": {
+    "type": "image",
+    "asset": "assets/vk-finopolis.png"
+  },
+  "captions": []
+}

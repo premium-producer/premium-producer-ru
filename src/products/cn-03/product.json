@@ -1,0 +1,11 @@
+{
+  "order": 3,
+  "code": "CN-03",
+  "title": "Content System",
+  "anchor": "content",
+  "visual": {
+    "type": "image",
+    "asset": "assets/vk-finopolis-depth.png"
+  },
+  "captions": []
+}
