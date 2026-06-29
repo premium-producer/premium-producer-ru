@@ -60,6 +60,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - `/gold/` provides the velvet burgundy-and-gold version.
 - Typography should be light/thin, not bold.
 - Work codes like `PR-01` sit below each visual object.
+- Clicking a work visual opens a Yeezy-inspired fullscreen detail view: the selected object is centered, side arrows switch works, the back control closes the view, and the plus link starts an email inquiry.
 - Vertical rhythm matters: distance from visual to label should feel balanced against distance from label to the next visual row.
 - Native Mac scrolling felt too plain, but the first custom `preventDefault` wheel implementation felt bad on Mac trackpad. Current trial uses Lenis instead.
 - Custom cursor should be a small heraldic fleur-de-lis. Current SVG size is `21x21`, about 1.5x smaller than the earlier `32x32`.

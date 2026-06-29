@@ -71,6 +71,10 @@ html {
   scrollbar-gutter: stable;
 }
 
+html.detail-open {
+  scrollbar-gutter: auto;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
@@ -82,8 +86,18 @@ body {
   overscroll-behavior: none;
 }
 
+body.detail-open {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
+  cursor: var(--fleur-cursor), pointer;
+}
+
+button {
+  color: inherit;
+  font: inherit;
   cursor: var(--fleur-cursor), pointer;
 }
 
@@ -318,6 +332,179 @@ a {
 .work-visual.visual-project:hover,
 .work-visual.visual-project:focus-visible {
   transform: translateY(-3px);
+}
+
+.work-detail {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: minmax(58px, 23vw) 1fr minmax(58px, 23vw);
+  grid-template-rows: 78px minmax(260px, 1fr) minmax(190px, 26vh);
+  color: var(--ink);
+  background: var(--body-bg);
+  opacity: 0;
+  transform: scale(1.012);
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease;
+}
+
+.work-detail[hidden] {
+  display: none;
+}
+
+.work-detail.is-open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.detail-back,
+.detail-arrow {
+  appearance: none;
+  border: 0;
+  background: transparent;
+}
+
+.detail-back {
+  width: 48px;
+  height: 58px;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  padding: 0 0 6px 10px;
+  font-size: 50px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.detail-count {
+  height: 58px;
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 15px;
+  font-size: 27px;
+  line-height: 1;
+}
+
+.detail-stage {
+  min-width: 0;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+}
+
+.detail-visual.work-visual {
+  width: min(54vw, 560px);
+  height: min(48vh, 520px);
+  min-height: 240px;
+  transform: none;
+  pointer-events: none;
+}
+
+.detail-visual.visual-project {
+  width: min(58vw, 720px);
+  height: min(54vh, 560px);
+}
+
+.detail-visual.visual-project-single {
+  width: min(46vw, 430px);
+}
+
+.work-detail.is-switching .detail-visual {
+  animation: detail-pop 180ms ease both;
+}
+
+.detail-arrow {
+  width: 64px;
+  height: 64px;
+  grid-row: 2;
+  align-self: center;
+  z-index: 2;
+  font-size: 72px;
+  font-weight: 300;
+  line-height: 0.72;
+}
+
+.detail-arrow-prev {
+  grid-column: 1;
+  justify-self: end;
+}
+
+.detail-arrow-next {
+  grid-column: 3;
+  justify-self: start;
+}
+
+.detail-meta {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+  display: grid;
+  justify-items: center;
+  gap: 17px;
+  padding-top: 16px;
+  text-align: center;
+}
+
+.detail-dots {
+  display: flex;
+  justify-content: center;
+  gap: 11px;
+  height: 8px;
+}
+
+.detail-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--soft);
+  opacity: 0.58;
+}
+
+.detail-dot.active {
+  background: var(--ink);
+  opacity: 1;
+}
+
+.detail-code,
+.detail-title,
+.detail-price,
+.detail-add {
+  margin: 0;
+  font-size: clamp(22px, 1.6vw, 32px);
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.detail-title {
+  display: none;
+}
+
+.detail-add {
+  font-size: clamp(42px, 3vw, 58px);
+  font-weight: 300;
+}
+
+@keyframes detail-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .work-visual span,
@@ -630,6 +817,66 @@ a {
   .work-visual.visual-project:hover,
   .work-visual.visual-project:focus-visible {
     transform: translateY(-3px);
+  }
+
+  .work-detail {
+    grid-template-columns: 52px 1fr 52px;
+    grid-template-rows: 72px minmax(260px, 1fr) minmax(184px, 27vh);
+  }
+
+  .detail-back {
+    width: 44px;
+    padding-left: 7px;
+    font-size: 44px;
+  }
+
+  .detail-count {
+    padding-right: 10px;
+    font-size: 23px;
+  }
+
+  .detail-stage {
+    grid-column: 1 / -1;
+    padding: 0 58px;
+  }
+
+  .detail-visual.work-visual,
+  .detail-visual.visual-project,
+  .detail-visual.visual-project-single {
+    width: min(74vw, 360px);
+    height: min(42vh, 360px);
+    min-height: 220px;
+  }
+
+  .detail-arrow {
+    width: 46px;
+    height: 58px;
+    font-size: 54px;
+  }
+
+  .detail-arrow-prev {
+    justify-self: start;
+    padding-left: 8px;
+  }
+
+  .detail-arrow-next {
+    justify-self: end;
+    padding-right: 8px;
+  }
+
+  .detail-meta {
+    grid-column: 1 / -1;
+    gap: 15px;
+    padding-top: 8px;
+  }
+
+  .detail-code,
+  .detail-price {
+    font-size: 24px;
+  }
+
+  .detail-add {
+    font-size: 46px;
   }
 
   .site-footer {

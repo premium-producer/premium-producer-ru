@@ -70,3 +70,5 @@
 - Added static GitHub Pages routes `/black/` and `/gold/`, with shared `styles.css` theme variables and footer links between the variants.
 - Updated `sitemap.xml` to include `/black/` and `/gold/`.
 - Verified `/`, `/black/`, and `/gold/` locally through a temporary HTTP server; assets loaded and browser console had no errors.
+- Added a Yeezy-inspired fullscreen work detail view opened from each work visual, with centered artwork, back/previous/next controls, dots, work code, `$60`, and a plus mail link.
+- Verified the detail view locally on desktop and mobile-width viewports; centered positioning, route compatibility, no horizontal overflow, and no console errors.
