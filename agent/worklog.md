@@ -62,3 +62,4 @@
 - Restricted the fleur-de-lis cursor aiming rotation to a horizontal `-45deg..45deg` range and made the rotation smoothing twice as slow.
 - Replaced object-aiming cursor rotation with inertial mouse-movement rotation: horizontal velocity sets a `-45deg..45deg` lean, then the cursor smoothly returns to center.
 - Smoothed the desktop cursor link zoom via CSS `@property --cursor-scale` and reduced hover scale from `1.75` to `1.4`.
+- Added explicit crawl/indexing files and metadata for search engines: root `robots.txt`, root `sitemap.xml`, `meta robots` with snippets allowed, stronger title/description, social metadata, and basic `WebSite` JSON-LD.
