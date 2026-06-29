@@ -1,0 +1,10 @@
+{
+  "order": 4,
+  "code": "PR-02",
+  "title": "Product Reference",
+  "visual": {
+    "type": "image",
+    "asset": "assets/image.png"
+  },
+  "captions": []
+}
