@@ -70,11 +70,12 @@ html {
   background: var(--bg-deep);
   scroll-behavior: smooth;
   overscroll-behavior: none;
-  scrollbar-gutter: stable;
+  scrollbar-width: none;
 }
 
-html.detail-open {
-  scrollbar-gutter: auto;
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 body {
