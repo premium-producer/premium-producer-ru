@@ -8,6 +8,12 @@
   --fleur-cursor: url("./public/fleur-cursor.svg") 10 10;
 }
 
+@property --cursor-scale {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 1;
+}
+
 * {
   box-sizing: border-box;
   cursor: var(--fleur-cursor), auto;
@@ -59,7 +65,9 @@ a {
     mix-blend-mode: difference;
     opacity: 0;
     transform: translate(-50%, -50%) rotate(var(--cursor-rotation)) scale(var(--cursor-scale));
-    transition: opacity 180ms ease;
+    transition:
+      opacity 180ms ease,
+      --cursor-scale 180ms ease;
     will-change: left, top, transform, opacity, filter;
   }
 
@@ -68,11 +76,11 @@ a {
   }
 
   .fleur-cursor.is-hovering {
-    --cursor-scale: 1.75;
+    --cursor-scale: 1.4;
   }
 
   .fleur-cursor.is-pressed {
-    --cursor-scale: 1.25;
+    --cursor-scale: 1.15;
   }
 }
 

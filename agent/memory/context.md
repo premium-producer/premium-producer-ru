@@ -59,6 +59,7 @@ The user specifically requested an `agent/` folder and an `agent/memory/` subfol
 - Custom cursor should be a small heraldic fleur-de-lis. Current SVG size is `21x21`, about 1.5x smaller than the earlier `32x32`.
 - Desktop cursor should react to mouse movement inertia rather than aim at work objects: horizontal pointer velocity sets a `-45deg..45deg` lean, then the cursor smoothly returns to center.
 - Cursor uses color inversion (`filter: invert(1)` with `mix-blend-mode: difference`) rather than staying visually static.
+- Cursor link hover zoom should be subtle and smooth; current hover scale is `1.4`, animated through CSS `@property --cursor-scale`.
 - Mobile/touch devices should avoid custom cursor and avoid forced smooth-scroll behavior.
 
 ## Deployment And Domain
