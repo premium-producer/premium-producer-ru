@@ -54,6 +54,7 @@ export function initWorkDetailView() {
   let swipeStartY = 0;
   let swipePointerId = null;
   let wheelLocked = false;
+  let loopCorrectionTimer = null;
 
   const renderDots = () => {
     dots.replaceChildren();
@@ -87,6 +88,46 @@ export function initWorkDetailView() {
     return `${prefix}/products/${slug}/${asset}`;
   };
 
+  const getNormalizedIndex = (index, total) => (index + total) % total;
+
+  const jumpToGalleryIndex = (gallery, index) => {
+    gallery.scrollTo({
+      behavior: "auto",
+      top: index * gallery.clientHeight,
+    });
+  };
+
+  const scheduleLoopCorrection = (gallery, targetIndex, delay = 120) => {
+    window.clearTimeout(loopCorrectionTimer);
+    loopCorrectionTimer = window.setTimeout(() => {
+      jumpToGalleryIndex(gallery, targetIndex);
+    }, delay);
+  };
+
+  const syncActiveMediaIndex = (gallery) => {
+    const realCount = Number(gallery.dataset.realCount || gallery.children.length);
+    const rawIndex = Math.round(gallery.scrollTop / gallery.clientHeight);
+
+    if (realCount < 2) {
+      activeMediaIndex = rawIndex;
+      return;
+    }
+
+    if (rawIndex === 0) {
+      activeMediaIndex = realCount - 1;
+      scheduleLoopCorrection(gallery, realCount);
+      return;
+    }
+
+    if (rawIndex === realCount + 1) {
+      activeMediaIndex = 0;
+      scheduleLoopCorrection(gallery, 1);
+      return;
+    }
+
+    activeMediaIndex = rawIndex - 1;
+  };
+
   const scrollToMedia = (index) => {
     const gallery = galleryMount.querySelector(".detail-gallery");
 
@@ -94,16 +135,34 @@ export function initWorkDetailView() {
       return;
     }
 
-    activeMediaIndex = (index + gallery.children.length) % gallery.children.length;
+    const realCount = Number(gallery.dataset.realCount || gallery.children.length);
+
+    if (realCount < 2) {
+      activeMediaIndex = 0;
+      return;
+    }
+
+    const normalizedIndex = getNormalizedIndex(index, realCount);
+    const targetIndex = index < 0
+      ? 0
+      : index >= realCount
+        ? realCount + 1
+        : normalizedIndex + 1;
+
+    activeMediaIndex = normalizedIndex;
     gallery.scrollTo({
       behavior: "smooth",
-      top: activeMediaIndex * gallery.clientHeight,
+      top: targetIndex * gallery.clientHeight,
     });
+
+    if (targetIndex === 0 || targetIndex === realCount + 1) {
+      scheduleLoopCorrection(gallery, normalizedIndex + 1, 380);
+    }
   };
 
   const updateMediaControls = () => {
     const gallery = galleryMount.querySelector(".detail-gallery");
-    const hasMultipleMedia = (gallery?.children.length || 0) > 1;
+    const hasMultipleMedia = Number(gallery?.dataset.realCount || gallery?.children.length || 0) > 1;
 
     mediaPrevButton.hidden = !hasMultipleMedia;
     mediaNextButton.hidden = !hasMultipleMedia;
@@ -121,26 +180,41 @@ export function initWorkDetailView() {
     const gallery = document.createElement("div");
 
     gallery.className = "detail-gallery";
+    gallery.dataset.realCount = String(galleryAssets.length || (fallbackVisual ? 1 : 0));
     activeMediaIndex = 0;
     gallery.addEventListener("scroll", () => {
-      activeMediaIndex = Math.round(gallery.scrollTop / gallery.clientHeight);
+      syncActiveMediaIndex(gallery);
     }, { passive: true });
 
-    galleryAssets.forEach((asset, index) => {
+    const createSlide = (asset, index, isClone = false) => {
       const slide = document.createElement("figure");
       const visual = document.createElement("div");
       const img = document.createElement("img");
 
-      slide.className = "detail-slide";
-      slide.setAttribute("aria-hidden", index === 0 ? "false" : "true");
+      slide.className = isClone ? "detail-slide detail-slide-clone" : "detail-slide";
+      slide.setAttribute("aria-hidden", !isClone && index === 0 ? "false" : "true");
       visual.className = `detail-visual work-visual ${visualClass}`.trim();
       img.src = getAssetUrl(card, asset);
       img.alt = "";
-      img.loading = index === 0 ? "eager" : "lazy";
+      img.loading = index === 0 && !isClone ? "eager" : "lazy";
       visual.append(img);
       slide.append(visual);
+      return slide;
+    };
+
+    if (galleryAssets.length > 1) {
+      gallery.append(createSlide(galleryAssets[galleryAssets.length - 1], galleryAssets.length - 1, true));
+    }
+
+    galleryAssets.forEach((asset, index) => {
+      const slide = createSlide(asset, index);
+
       gallery.append(slide);
     });
+
+    if (galleryAssets.length > 1) {
+      gallery.append(createSlide(galleryAssets[0], 0, true));
+    }
 
     if (!gallery.children.length && fallbackVisual) {
       const clonedVisual = fallbackVisual.cloneNode(true);
@@ -153,6 +227,11 @@ export function initWorkDetailView() {
     }
 
     galleryMount.replaceChildren(gallery);
+    window.requestAnimationFrame(() => {
+      if (gallery.dataset.realCount > 1) {
+        jumpToGalleryIndex(gallery, 1);
+      }
+    });
     updateMediaControls();
     code.textContent = card.querySelector(".work-code")?.textContent?.trim() || "";
     title.textContent = card.querySelector("h2")?.textContent?.trim() || "";
