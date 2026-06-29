@@ -277,7 +277,7 @@ export function initWorkDetailView() {
     const realCount = Number(gallery?.dataset.realCount || 0);
     const absX = Math.abs(event.deltaX);
     const absY = Math.abs(event.deltaY);
-    const wheelThreshold = 14;
+    const wheelThreshold = 28;
     const isHorizontalWheel = absX > absY;
 
     if (!gallery || Math.max(absX, absY) < wheelThreshold) {
@@ -290,15 +290,11 @@ export function initWorkDetailView() {
 
     event.preventDefault();
 
-    window.clearTimeout(wheelUnlockTimer);
-    wheelUnlockTimer = window.setTimeout(() => {
-      wheelLocked = false;
-    }, 240);
-
     if (wheelLocked) {
       return;
     }
 
+    window.clearTimeout(wheelUnlockTimer);
     wheelLocked = true;
 
     if (isHorizontalWheel) {
@@ -307,6 +303,9 @@ export function initWorkDetailView() {
       moveMedia(event.deltaY > 0 ? 1 : -1);
     }
 
+    wheelUnlockTimer = window.setTimeout(() => {
+      wheelLocked = false;
+    }, 620);
   };
 
   cards.forEach((card, index) => {
